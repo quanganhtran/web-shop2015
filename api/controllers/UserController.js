@@ -129,6 +129,18 @@ module.exports = {
                   return res.emailAddressInUse();
                 }
 
+                if (err.invalidAttributes && err.invalidAttributes.email && err.invalidAttributes.email[0]
+                  && err.invalidAttributes.email[0].rule === 'email') {
+                  return res.notValidEmail();
+                }
+
+                // If this is a uniqueness error about the username attribute,
+                // send back an easily parseable status code.
+                if (err.invalidAttributes && err.invalidAttributes.username && err.invalidAttributes.username[0]
+                  && err.invalidAttributes.username[0].rule === 'unique') {
+                  return res.usernameInUse();
+                }
+
                 // Otherwise, send back something reasonable as our error response.
                 return res.negotiate(err);
               }

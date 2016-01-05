@@ -26,10 +26,29 @@ angular.module('SignupModule').controller('SignupController', ['$scope', '$http'
         var emailAddressAlreadyInUse = sailsResponse.status == 409;
 
         if (emailAddressAlreadyInUse) {
-          toastr.error('That email address has already been taken, please try again.', 'Error');
+          toastr.error('That email address has already been taken, please try again.', 'Error', {
+            closeButton: true
+          });
           return;
         }
 
+        var usernameAlreadyInUse = sailsResponse.status == 418;
+
+        if (usernameAlreadyInUse) {
+          toastr.error('That username has already been taken, please try again.', 'Error', {
+            closeButton: true
+          });
+          return;
+        }
+
+        var notValidEmail = sailsResponse.status == 419;
+
+        if (notValidEmail) {
+          toastr.error('The email address is not valid, please try again.', 'Error', {
+            closeButton: true
+          });
+          return;
+        }
       })
       .finally(function eitherWay(){
         $scope.signupForm.loading = false;
