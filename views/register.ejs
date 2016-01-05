@@ -1,0 +1,10 @@
+<div class="container" ng-app="registerModule" ng-controller="">
+<%- partial('header') %>
+  <h1>Register as a new customer.</h1>
+  <form novalidate>
+    <p>Please fill in the blanks. Required items are marked with *.</p>
+    <span>Username</span><input type="text" name="username" ng-model="user.name">
+    <span>Password</span><input type="password" name="password" ng-model="user.password">
+    <span>Retype password</span><input type="password" ng-model="user.password">
+  </form>
+</div>

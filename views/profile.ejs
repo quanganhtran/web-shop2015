@@ -1,0 +1,6 @@
+<div class="container">
+  Username: <%= user.username %><br>
+  <% if (req.session.me && user.username == req.session.me) {%>
+  <button onclick="">Logout</button>
+  <%}%>
+</div>
