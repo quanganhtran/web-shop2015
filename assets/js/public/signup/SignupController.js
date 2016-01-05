@@ -14,14 +14,15 @@ angular.module('SignupModule').controller('SignupController', ['$scope', '$http'
       name: $scope.signupForm.name,
       username: $scope.signupForm.username,
       email: $scope.signupForm.email,
-      password: $scope.signupForm.password
+      password: $scope.signupForm.password,
+      address: $scope.signupForm.address,
+      phone: $scope.signupForm.phone
     })
       .then(function onSuccess(sailsResponse){
         window.location = '/';
       })
       .catch(function onError(sailsResponse){
         // Handle known error type(s).
-        // If using sails-disk adpater -- Handle Duplicate Key
         var emailAddressAlreadyInUse = sailsResponse.status == 409;
 
         if (emailAddressAlreadyInUse) {

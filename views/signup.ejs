@@ -71,27 +71,6 @@
   <h2 class="form-signin-heading">Create an account</h2>
   <div class="row">
 
-    <!-- N A M E -->
-
-    <!-- checking whether the form "signup" with the "name" property is both $invalid AND $dirty.  If it is
-    insert the "has-error" class on the input field (i.e. insert a red border around the input field)
-    -->
-    <div class="control-group form-group col-md-12"
-         ng-class="{'has-error':signup.name.$invalid &&
-                              signup.name.$dirty}">
-      <label>Your full name</label>
-
-      <!-- For this input field make it required, and have a max length of 25 -->
-      <input type="text" class="form-control" placeholder="e.g. Linus Tovalds" name="name" ng-model="signupForm.name" ng-maxlength="50" required>
-
-      <!-- Also, if signup.name.$dirty is true, show the message depending upon the particular properties truthiness (e.g. required
-      and/or maxlength) -->
-          <span class="help-block has-error" ng-if="signup.name.$dirty">
-            <span ng-show="signup.name.$error.required">Name is required.</span>
-            <span ng-show="signup.name.$error.maxlength">The name cannot be more than 50 characters.</span>
-          </span>
-    </div>
-
     <!-- U S E R N A M E -->
 
     <div class="control-group form-group col-md-12"
@@ -142,6 +121,63 @@
             <span ng-show="signup.confirmation.$error.required">Confirmation password is required.</span>
           </span>
     </div>
+
+    <!-- N A M E -->
+
+    <!-- checking whether the form "signup" with the "name" property is both $invalid AND $dirty.  If it is
+    insert the "has-error" class on the input field (i.e. insert a red border around the input field)
+    -->
+    <div class="control-group form-group col-md-12"
+         ng-class="{'has-error':signup.name.$invalid &&
+                              signup.name.$dirty}">
+      <label>Your full name</label>
+
+      <!-- For this input field make it required, and have a max length of 50 -->
+      <input type="text" class="form-control" placeholder="e.g. Linus Tovalds" name="name" ng-model="signupForm.name" ng-maxlength="50" required>
+
+      <!-- Also, if signup.name.$dirty is true, show the message depending upon the particular properties truthiness (e.g. required
+      and/or maxlength) -->
+          <span class="help-block has-error" ng-if="signup.name.$dirty">
+            <span ng-show="signup.name.$error.required">Name is required.</span>
+            <span ng-show="signup.name.$error.maxlength">The name cannot be more than 50 characters.</span>
+          </span>
+    </div>
+
+    <!-- A D D R E S S -->
+
+    <div class="control-group form-group col-md-12"
+         ng-class="{'has-error':signup.address.$invalid &&
+                              signup.address.$dirty}">
+      <label>Your address</label>
+
+      <!-- For this input field make it required, and have a max length of 50 -->
+      <input type="text" class="form-control" placeholder="e.g. Daegu, South Korea" name="address" ng-model="signupForm.address" ng-maxlength="50" required>
+
+      <!-- Also, if signup.address.$dirty is true, show the message depending upon the particular properties truthiness (e.g. required
+      and/or maxlength) -->
+          <span class="help-block has-error" ng-if="signup.address.$dirty">
+            <span ng-show="signup.address.$error.required">Address is required.</span>
+            <span ng-show="signup.address.$error.maxlength">The address cannot be more than 50 characters.</span>
+          </span>
+    </div>
+
+    <!-- P H O N E -->
+
+    <div class="control-group form-group col-md-12"
+         ng-class="{'has-error':signup.phone.$invalid &&
+                              signup.phone.$dirty}">
+      <label>Your phone number</label>
+
+      <!-- For this input field make it required, and have a max length of 50 -->
+      <input type="text" class="form-control" placeholder="e.g. 04567890" name="phone" ng-model="signupForm.phone" ng-maxlength="50">
+
+      <!-- Also, if signup.phone.$dirty is true, show the message depending upon the particular properties truthiness (e.g. required
+      and/or maxlength) -->
+          <span class="help-block has-error" ng-if="signup.phone.$dirty">
+            <span ng-show="signup.phone.$error.maxlength">The address cannot be more than 50 characters.</span>
+          </span>
+    </div>
+
   </div>
 
   <br/>

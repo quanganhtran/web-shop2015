@@ -113,7 +113,9 @@ module.exports = {
               email: req.param('email'),
               encryptedPassword: encryptedPassword,
               lastLoggedIn: new Date(),
-              gravatarUrl: gravatarUrl
+              gravatarUrl: gravatarUrl,
+              address: req.param('address'),
+              phone: req.param('phone')
             }, function userCreated(err, newUser) {
               if (err) {
 
