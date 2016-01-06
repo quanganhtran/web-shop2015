@@ -57,6 +57,7 @@ module.exports = {
     role: {
       model: 'role',
       defaultsTo: 2
+      // 1: admin, 2: registered, 3: merchant
     }
   }
 

@@ -25,16 +25,7 @@ module.exports = {
         return res.view('homepage');
       }
 
-      return res.view('dashboard', {
-        me: {
-          id: user.id,
-          name: user.name,
-          email: user.email,
-          username: user.username,
-          // isAdmin: !!user.admin,
-          gravatarUrl: user.gravatarUrl
-        }
-      });
+      return res.view('dashboard', {layout: 'layouts/loggedIn', me: user});
 
     });
   }

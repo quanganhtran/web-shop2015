@@ -105,53 +105,67 @@ module.exports = {
             return res.negotiate(err);
           },
           success: function(gravatarUrl) {
-            // Create a User with the params sent from
-            // the sign-up form --> signup.ejs
-            User.create({
-              name: req.param('name'),
-              username: req.param('username'),
-              email: req.param('email'),
-              encryptedPassword: encryptedPassword,
-              lastLoggedIn: new Date(),
-              gravatarUrl: gravatarUrl,
-              address: req.param('address'),
-              phone: req.param('phone')
-            }, function userCreated(err, newUser) {
-              if (err) {
+            // find a default role to assign to a new user
+            role.findOne(2, function foundRole(err, role) {
+              if (err) return res.negotiate(err);
 
-                console.log("err: ", err);
-                console.log("err.invalidAttributes: ", err.invalidAttributes)
-
-                // If this is a uniqueness error about the email attribute,
-                // send back an easily parseable status code.
-                if (err.invalidAttributes && err.invalidAttributes.email && err.invalidAttributes.email[0]
-                  && err.invalidAttributes.email[0].rule === 'unique') {
-                  return res.emailAddressInUse();
-                }
-
-                if (err.invalidAttributes && err.invalidAttributes.email && err.invalidAttributes.email[0]
-                  && err.invalidAttributes.email[0].rule === 'email') {
-                  return res.notValidEmail();
-                }
-
-                // If this is a uniqueness error about the username attribute,
-                // send back an easily parseable status code.
-                if (err.invalidAttributes && err.invalidAttributes.username && err.invalidAttributes.username[0]
-                  && err.invalidAttributes.username[0].rule === 'unique') {
-                  return res.usernameInUse();
-                }
-
-                // Otherwise, send back something reasonable as our error response.
-                return res.negotiate(err);
+              // If session refers to a user who no longer exists, still allow logout.
+              if (!role) {
+                sails.log.verbose('Session refers to a role that no longer exists.');
+                return res.notFound();
               }
 
-              // Log user in
-              req.session.me = newUser.id;
+              // Create a User with the params sent from
+              // the sign-up form --> signup.ejs
+              User.create({
+                name: req.param('name'),
+                username: req.param('username'),
+                email: req.param('email'),
+                encryptedPassword: encryptedPassword,
+                lastLoggedIn: new Date(),
+                gravatarUrl: gravatarUrl,
+                address: req.param('address'),
+                phone: req.param('phone'),
+                role: role
+              }, function userCreated(err, newUser) {
+                if (err) {
 
-              // Send back the id of the new user
-              return res.json({
-                id: newUser.id
-              });
+                  console.log("err: ", err);
+                  console.log("err.invalidAttributes: ", err.invalidAttributes)
+
+                  // If this is a uniqueness error about the email attribute,
+                  // send back an easily parseable status code.
+                  if (err.invalidAttributes && err.invalidAttributes.email && err.invalidAttributes.email[0]
+                    && err.invalidAttributes.email[0].rule === 'unique') {
+                    return res.emailAddressInUse();
+                  }
+
+                  if (err.invalidAttributes && err.invalidAttributes.email && err.invalidAttributes.email[0]
+                    && err.invalidAttributes.email[0].rule === 'email') {
+                    return res.notValidEmail();
+                  }
+
+                  // If this is a uniqueness error about the username attribute,
+                  // send back an easily parseable status code.
+                  if (err.invalidAttributes && err.invalidAttributes.username && err.invalidAttributes.username[0]
+                    && err.invalidAttributes.username[0].rule === 'unique') {
+                    return res.usernameInUse();
+                  }
+
+                  // Otherwise, send back something reasonable as our error response.
+                  return res.negotiate(err);
+                }
+
+                // Log user in
+                req.session.me = newUser.id;
+
+                // Send back the id of the new user
+                return res.json({
+                  id: newUser.id
+                });
+
+            });
+
             });
           }
         })
@@ -184,6 +198,15 @@ module.exports = {
         var msg = user.id == 3 ? 'Merchant privilege has been granted for this user.' : 'Merchant privilege has been revoked from this user.';
         return res.ok(msg);
       });
+    });
+  },
+
+  // render the profile view (/views/profile.ejs)
+  showProfile: function (req, res, next) {
+    User.findOne(req.session.me, function foundUser (err, user){
+      if (err) return next(err);
+      if (!user) return next();
+      res.view('user/profile', {layout: 'layouts/loggedIn', me: user});
     });
   },
 

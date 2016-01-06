@@ -1,0 +1,23 @@
+<div>
+  <img src="<%= me.gravatarUrl %>" />
+  <h3>name: <%= me.name %> </h3>
+  <hr>
+  <h3>Address: <%= me.address %> </h3>
+  <hr>
+  <h3>Phone number: <%= me.phone %> </h3>
+  <hr>
+  <h3>Last logged in at: <%= me.lastLoggedIn %> </h3>
+  <hr>
+  <h3>Role: <% if (me.role === 1) { %>
+    Admin
+    <% } else if (me.role === 3) { %>
+    Merchant
+    <% } else { %>
+    Registered
+    <% } %></h3>
+  <hr>
+  <h3>contact: <%= me.email %> </h3>
+
+  <a class="btn btn-medium btn-primary" href="/user/edit/<%= me.id %>">Edit</a>
+
+</div>
