@@ -58,6 +58,10 @@ module.exports = {
       model: 'role',
       defaultsTo: 2
       // 1: admin, 2: registered, 3: merchant
+    },
+    isApplyingForMerchant: {
+      type: 'boolean',
+      defaultsTo: false
     }
   }
 

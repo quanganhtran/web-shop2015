@@ -44,6 +44,17 @@ module.exports = {
       if (err) return res.negotiate(err);
       return res.ok(item);
     });
+  },
+
+  /**
+   * ItemController.showProducts()
+   * Route to the page that shows products
+   *
+   * @param  {Object} req
+   * @param  {Object} res
+   */
+  showProducts: function(req, res) {
+
   }
 
 };

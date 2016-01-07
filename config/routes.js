@@ -49,10 +49,13 @@ module.exports.routes = {
    * API routes here
    * Custom API routes always return JSON. Default blueprints are also available.
    */
+  // User routes
   'POST /signup': 'UserController.signup',
   'PUT /login': 'UserController.login',
   'GET /profile': 'UserController.showProfile',
-  'GET /logout': 'UserController.logout'
+  'GET /logout': 'UserController.logout',
+  // Item routes
+  'GET /products': 'ItemController.showProducts'
 
   /*
    * Web routes here

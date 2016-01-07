@@ -49,8 +49,14 @@ module.exports = {
   },
 
   /**
-   * Log out of Activity Overlord.
-   * (wipes `me` from the sesion)
+   * UserController.signup()
+   * Register a new user
+   *
+   * @param  {Object}   req
+   * @param  {Object}   req.params
+   *                     • username {String}
+   *                     • password {String}
+   * @param  {Function} res
    */
   logout: function (req, res) {
 
@@ -82,6 +88,10 @@ module.exports = {
    * @param  {Object}   req.params
    *                     • username {String}
    *                     • password {String}
+   *                     • address {String}
+   *                     • phone {String}
+   *                     • name {String}
+   *                     • email {String}
    * @param  {Function} res
    */
   signup: function (req, res) {
@@ -106,7 +116,7 @@ module.exports = {
           },
           success: function(gravatarUrl) {
             // find a default role to assign to a new user
-            role.findOne(2, function foundRole(err, role) {
+            Role.findOne(2, function foundRole(err, role) {
               if (err) return res.negotiate(err);
 
               // If session refers to a user who no longer exists, still allow logout.
@@ -117,6 +127,8 @@ module.exports = {
 
               // Create a User with the params sent from
               // the sign-up form --> signup.ejs
+              console.log(req.param('isApplyingForMerchant') + typeof(req.param('isApplyingForMerchant')));
+              console.log('is same? '+ req.param('isApplyingForMerchant') === true);
               User.create({
                 name: req.param('name'),
                 username: req.param('username'),
@@ -126,7 +138,8 @@ module.exports = {
                 gravatarUrl: gravatarUrl,
                 address: req.param('address'),
                 phone: req.param('phone'),
-                role: role
+                role: role,
+                isApplyingForMerchant: req.param('isApplyingForMerchant') === true
               }, function userCreated(err, newUser) {
                 if (err) {
 

@@ -10,13 +10,15 @@ angular.module('SignupModule').controller('SignupController', ['$scope', '$http'
 
   $scope.submitSignupForm = function() {
     $scope.signupForm.loading = true;
+    console.log('signup ctrl'+$scope.signupForm.isApplyingForMerchant);
     $http.post('/signup', {
       name: $scope.signupForm.name,
       username: $scope.signupForm.username,
       email: $scope.signupForm.email,
       password: $scope.signupForm.password,
       address: $scope.signupForm.address,
-      phone: $scope.signupForm.phone
+      phone: $scope.signupForm.phone,
+      isApplyingForMerchant: $scope.signupForm.isApplyingForMerchant
     })
       .then(function onSuccess(sailsResponse){
         window.location = '/';

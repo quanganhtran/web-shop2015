@@ -14,7 +14,10 @@
     Merchant
     <% } else { %>
     Registered
-    <% } %></h3>
+    <% if (me.isApplyingForMerchant) { %>
+    and applying for the merchant status
+    <%}
+    } %></h3>
   <hr>
   <h3>contact: <%= me.email %> </h3>
 
