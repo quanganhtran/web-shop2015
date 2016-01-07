@@ -13,23 +13,24 @@ module.exports = {
       size: 25,
       required : true
     },
-    imagePath: {
-      type: 'string',
-      size: 50
+    price: {
+      type: 'float',
+      required : true
+    },
+    createdBy: {
+      model: 'user',
+      required : true
     },
     description: {
       type: 'string',
       size: 100
     },
-    price: {
-      type: 'float',
-      required : true
+    imagePath: {
+      type: 'string',
+      size: 50
     },
     manufacturedDate: {
       type: 'date'
-    },
-    createdBy: {
-      model: 'user'
     },
     boughtIn: {
       collection: 'orderDetail',

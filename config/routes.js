@@ -55,7 +55,9 @@ module.exports.routes = {
   'GET /profile': 'UserController.showProfile',
   'GET /logout': 'UserController.logout',
   // Item routes
-  'GET /products': 'ItemController.showProducts'
+  'GET /products': 'ItemController.showProducts',
+  'GET /addItem': 'ItemController.addItem',
+  'POST /addItem': 'ItemController.submit'
 
   /*
    * Web routes here

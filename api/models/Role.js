@@ -10,7 +10,8 @@ module.exports = {
     name: {
       type: 'string',
       size: '45',
-      required: true
+      required: true,
+      enum: ['admin', 'registered', 'merchant']
     },
     users: {
       collection: 'user',

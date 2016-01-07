@@ -50,11 +50,12 @@
         <!-- Using ng-show instead of ng-if because we need this mark-up to be in the dom when signup controller
         fires.  If it's not there (which it wouldn't be in the case of ng-if) then the scope of the signup
         controller will not be tied to this element. -->
+        <!-- Everyone's interface -->
         <li>
           <a href="/profile">Profile</a>
         </li>
         <li>
-          <a href="/products">products</a>
+          <a href="/products">Products</a>
         </li>
         <% if (me.role === 1) { %>
         <!-- Admin interface -->
@@ -67,7 +68,7 @@
         <% } else if (me.role === 3) { %>
         <!-- Merchant interface -->
         <li>
-          <a href="#">Manage items</a>
+          <a href="/addItem">Add items</a>
         </li>
         <% } else { %>
         <!-- User interface -->
@@ -79,7 +80,7 @@
         </li>
         <% } %>
         <li>
-          <a href="/logout">sign-out</a>
+          <a href="/logout">Sign-out</a>
         </li>
         <!-- <a ng-controller="signinController" class="btn btn-default navbar-btn navbar-right" href="#" ng-if="!isAuthenticated">sign-in</a> -->
         <!-- Using ng-show instead of ng-if because we need this mark-up to be in the dom when signup controller
@@ -96,14 +97,19 @@
 <script src="/js/dependencies/angular.1.3.js"></script>
 <script src="/js/dependencies/angular-toastr.js"></script>
 <script src="/js/dependencies/compareTo.module.js"></script>
+<script src="/js/dependencies/jquery.js"></script>
 <script src="/js/dependencies/simpleCart.js"></script>
 <script src="/js/public/signup/SignupModule.js"></script>
-<script src="/js/private/dashboard/DashboardModule.js"></script>
 <script src="/js/public/homepage/HomepageModule.js"></script>
+<script src="/js/private/product/ProductsModule.js"></script>
+<script src="/js/private/addItem/addItemModule.js"></script>
+<script src="/js/private/dashboard/DashboardModule.js"></script>
 <script src="/js/pages/homepage.js"></script>
 <script src="/js/pages/sessionModule.js"></script>
 <script src="/js/pages/sessionService.js"></script>
+<script src="/js/private/addItem/addItemController.js"></script>
 <script src="/js/private/dashboard/DashboardController.js"></script>
+<script src="/js/private/product/ProductsController.js"></script>
 <script src="/js/public/homepage/HomepageController.js"></script>
 <script src="/js/public/signup/SignupController.js"></script>
 <!--SCRIPTS END-->

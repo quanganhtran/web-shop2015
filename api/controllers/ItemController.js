@@ -21,7 +21,10 @@ module.exports = {
     Item.create({
       name: req.param('name'),
       price: req.param('price'),
-      createdBy: req.session.me
+      createdBy: req.session.me,
+      description: req.param('description'),
+      imagePath: req.param('imagePath'),
+      manufacturedDate: req.param('manufacturedDate')
     }).exec(function (err, item){
       if (err) return res.negotiate(err);
       return res.ok(item);
@@ -54,7 +57,33 @@ module.exports = {
    * @param  {Object} res
    */
   showProducts: function(req, res) {
+    User.findOne(req.session.me, function foundUser (err, user){
+      if (err) return next(err);
+      if (!user) return next();
+      Item.find({}).exec(function foundItem(err, items) {
+        if (err) return res.negotiate(err);
+        return res.view('item/products', {
+          layout: 'layouts/loggedIn',
+          items:items,
+          me: user
+        });
+      })
+    });
+  },
 
+  addItem: function(req, res) {
+    User.findOne(req.session.me, function foundUser (err, user){
+      if (err) return next(err);
+      if (!user) return next();
+      Item.find({}).exec(function foundItem(err, items) {
+        if (err) return res.negotiate(err);
+        return res.view('item/addItem', {
+          layout: 'layouts/loggedIn',
+          items:items,
+          me: user
+        });
+      })
+    });
   }
 
 };

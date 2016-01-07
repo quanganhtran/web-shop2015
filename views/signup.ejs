@@ -74,13 +74,13 @@
     <!-- U S E R N A M E -->
 
     <div class="control-group form-group col-md-12"
-         ng-class="{'has-error':signup.title.$invalid &&
-                                signup.title.$dirty}">
+         ng-class="{'has-error':signup.username.$invalid &&
+                                signup.username.$dirty}">
       <label>Your username</label>
-      <input type="text" class="form-control" placeholder="e.g. linus1234" name="title" ng-model="signupForm.username" ng-maxlength="50" required>
-          <span class="help-block has-error" ng-if="signup.title.$dirty">
-            <span ng-show="signup.title.$error.required">Title is required.</span>
-            <span ng-show="signup.title.$error.maxlength">The name cannot be more than 50 characters.</span>
+      <input type="text" class="form-control" placeholder="e.g. linus1234" name="username" ng-model="signupForm.username" ng-maxlength="50" required>
+          <span class="help-block has-error" ng-if="signup.username.$dirty">
+            <span ng-show="signup.username.$error.required">Username is required.</span>
+            <span ng-show="signup.username.$error.maxlength">The username cannot be more than 50 characters.</span>
           </span>
     </div>
 
@@ -133,12 +133,11 @@
       <label>Your full name</label>
 
       <!-- For this input field make it required, and have a max length of 50 -->
-      <input type="text" class="form-control" placeholder="e.g. Linus Tovalds" name="name" ng-model="signupForm.name" ng-maxlength="50" required>
+      <input type="text" class="form-control" placeholder="e.g. Linus Tovalds" name="name" ng-model="signupForm.name" ng-maxlength="50">
 
       <!-- Also, if signup.name.$dirty is true, show the message depending upon the particular properties truthiness (e.g. required
       and/or maxlength) -->
           <span class="help-block has-error" ng-if="signup.name.$dirty">
-            <span ng-show="signup.name.$error.required">Name is required.</span>
             <span ng-show="signup.name.$error.maxlength">The name cannot be more than 50 characters.</span>
           </span>
     </div>
@@ -151,12 +150,11 @@
       <label>Your address</label>
 
       <!-- For this input field make it required, and have a max length of 50 -->
-      <input type="text" class="form-control" placeholder="e.g. Daegu, South Korea" name="address" ng-model="signupForm.address" ng-maxlength="50" required>
+      <input type="text" class="form-control" placeholder="e.g. Daegu, South Korea" name="address" ng-model="signupForm.address" ng-maxlength="50">
 
       <!-- Also, if signup.address.$dirty is true, show the message depending upon the particular properties truthiness (e.g. required
       and/or maxlength) -->
           <span class="help-block has-error" ng-if="signup.address.$dirty">
-            <span ng-show="signup.address.$error.required">Address is required.</span>
             <span ng-show="signup.address.$error.maxlength">The address cannot be more than 50 characters.</span>
           </span>
     </div>
@@ -217,14 +215,19 @@
 <script src="/js/dependencies/angular.1.3.js"></script>
 <script src="/js/dependencies/angular-toastr.js"></script>
 <script src="/js/dependencies/compareTo.module.js"></script>
+<script src="/js/dependencies/jquery.js"></script>
 <script src="/js/dependencies/simpleCart.js"></script>
 <script src="/js/public/signup/SignupModule.js"></script>
-<script src="/js/private/dashboard/DashboardModule.js"></script>
 <script src="/js/public/homepage/HomepageModule.js"></script>
+<script src="/js/private/product/ProductsModule.js"></script>
+<script src="/js/private/addItem/addItemModule.js"></script>
+<script src="/js/private/dashboard/DashboardModule.js"></script>
 <script src="/js/pages/homepage.js"></script>
 <script src="/js/pages/sessionModule.js"></script>
 <script src="/js/pages/sessionService.js"></script>
+<script src="/js/private/addItem/addItemController.js"></script>
 <script src="/js/private/dashboard/DashboardController.js"></script>
+<script src="/js/private/product/ProductsController.js"></script>
 <script src="/js/public/homepage/HomepageController.js"></script>
 <script src="/js/public/signup/SignupController.js"></script>
 <!--SCRIPTS END-->
