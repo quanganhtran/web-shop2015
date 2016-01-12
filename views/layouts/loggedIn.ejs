@@ -60,25 +60,23 @@
         <% if (me.role === 1) { %>
         <!-- Admin interface -->
         <li>
-          <a href="#">Manage users</a>
-        </li>
-        <li>
-          <a href="#">Manage items</a>
+          <a href="/showUsers">Manage users</a>
         </li>
         <% } else if (me.role === 3) { %>
         <!-- Merchant interface -->
         <li>
           <a href="/addItem">Add items</a>
         </li>
-        <% } else { %>
-        <!-- User interface -->
+        <li>
+          <a href="#">Manage items</a>
+        </li>
+        <!-- Everyone's interface -->
         <li>
           <a href="/#">My Cart</a>
         </li>
         <li>
           <a href="/#">My order</a>
         </li>
-        <% } %>
         <li>
           <a href="/logout">Sign-out</a>
         </li>

@@ -1,9 +1,29 @@
-<div ng-app="ProductsModule" ng-controller="ProductsController" ng-cloak>
-  <ul>
-    <li ng-repeat="product in products">
-      <h3>name: {{ product.name }} </h3>
-      <h3>price: {{ product.price }} </h3>
-      <hr>
-    </li>
-  </ul>
+<div class="container">
+  <h3>Products</h3>
+  <table class="table">
+    <tr>
+      <th>Product Name</th>
+      <th>Price</th>
+      <th>Created By</th>
+      <th>description</th>
+      <th>image</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+    <% _.each(items, function(item) { %>
+    <tr data-id="<%= item.id %>" data-model="item">
+      <td><%= item.name %></td>
+      <td><%= item.price %></td>
+      <td><%= item.createdBy.username %></td>
+      <td>description</td>
+      <td>image</td>
+      <td><a href="#">Add to cart</a></td>
+      <td><a href="#">Purchase</a></td>
+      <td><a href="#">view</a></td>
+    </tr>
+
+    <% }) %>
+  </table>
 </div>

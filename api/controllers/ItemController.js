@@ -60,7 +60,7 @@ module.exports = {
     User.findOne(req.session.me, function foundUser (err, user){
       if (err) return next(err);
       if (!user) return next();
-      Item.find({}).exec(function foundItem(err, items) {
+      Item.find().populate('createdBy').exec(function foundItem(err, items) {
         if (err) return res.negotiate(err);
         return res.view('item/products', {
           layout: 'layouts/loggedIn',

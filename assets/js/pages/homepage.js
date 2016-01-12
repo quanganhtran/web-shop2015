@@ -4,5 +4,7 @@
 var app = angular.module('homepage', ['sessionModule']);
 
 app.controller('itemListController', function($scope, $http) {
-  $http.get('/api/item').then(function (response) {$scope.items = response.data;});
+  $http.get('/api/item').then(function (response) {
+    $scope.items = response.data;
+  });
 });

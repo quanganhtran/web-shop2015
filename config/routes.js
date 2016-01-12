@@ -54,6 +54,7 @@ module.exports.routes = {
   'PUT /login': 'UserController.login',
   'GET /profile': 'UserController.showProfile',
   'GET /logout': 'UserController.logout',
+  'GET /showUsers': 'UserController.showUsers',
   // Item routes
   'GET /products': 'ItemController.showProducts',
   'GET /addItem': 'ItemController.addItem',

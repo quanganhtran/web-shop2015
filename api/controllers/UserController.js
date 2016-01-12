@@ -223,6 +223,25 @@ module.exports = {
     });
   },
 
+  showUsers: function (req, res, next) {
+
+    // Get an arraya of all users in the User collection(e.g. table)
+    User.find().populate('role').exec(function foundUsers (err, users) {
+      if (err) return next(err);
+      // pass the array down to the /views/user/users.ejs page
+
+      User.findOne(req.session.me, function foundUser (err, user){
+        if (err) return next(err);
+        if (!user) return next();
+        res.view(
+          'user/users', {layout: 'layouts/loggedIn', me: user, users: users}
+        );
+      });
+
+      }
+    )
+  },
+
   /**
    * UserController.info()
    */
