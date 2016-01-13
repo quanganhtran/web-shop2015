@@ -33,7 +33,7 @@ module.exports.routes = {
   ***************************************************************************/
 
   'GET /': 'PageController.showHomePage',
-  'GET /signup': {view: 'signup'},
+
 
   /***************************************************************************
   *                                                                          *
@@ -50,11 +50,14 @@ module.exports.routes = {
    * Custom API routes always return JSON. Default blueprints are also available.
    */
   // User routes
+  'GET /signup': {view: 'signup'},
   'POST /signup': 'UserController.signup',
   'PUT /login': 'UserController.login',
   'GET /profile': 'UserController.showProfile',
   'GET /logout': 'UserController.logout',
   'GET /showUsers': 'UserController.showUsers',
+  'GET /user/edit': 'UserController.getEditView',
+  'POST /user/edit': 'UserController.edit',
   // Item routes
   'GET /products': 'ItemController.showProducts',
   'GET /addItem': 'ItemController.addItem',

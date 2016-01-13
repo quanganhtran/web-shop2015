@@ -1,0 +1,117 @@
+<div ng-controller="EditController" ng-cloak>
+  <!-- edit FORM -->
+  <form ng-submit="submitEditForm()" id="sign-up-form" class="form-edit" name="edit">
+    <h2 class="form-edit-heading">Edit an account</h2>
+
+    <div class="row">
+
+      <!-- E M A I L -->
+
+      <div class="control-group form-group col-md-12"
+           ng-class="{'has-error':edit.email.$invalid &&
+                              edit.email.$dirty}">
+        <label>Email address</label>
+        <input type="email" class="form-control" value="<%= me.email %>" name="email"
+               ng-model="editForm.email" required>
+          <span class="help-block has-error" ng-if="edit.email.$dirty">
+            <span ng-show="edit.email.$error.required">Email address is required.</span>
+            <span ng-show="edit.email.$error.email">Not a valid email address.</span>
+          </span>
+      </div>
+
+      <!-- P A S S W O R D -->
+
+      <div class="control-group form-group col-md-6"
+           ng-class="{'has-error':edit.password.$invalid &&
+                              edit.password.$dirty}">
+        <label>New password</label>
+        <!-- Added the compareTo directive that compares the passowrds -->
+        <input type="password" class="form-control" placeholder="at least 6 characters" name="password"
+               ng-model="editForm.password" id="password" ng-minlength="6"
+               compare-to="editForm.confirmPassword">
+          <span class="help-block has-error" ng-if="edit.password.$dirty">
+            <span ng-show="edit.password.$error.minlength">Password must be at least 6 characters.</span>
+          </span>
+      </div>
+
+      <!-- C O N F I R M  P A S S W O R D -->
+
+      <div class="control-group form-group col-md-6">
+        <label>Re-enter new password</label>
+        <input type="password" class="form-control" placeholder="one more time" name="confirmation"
+               ng-model="editForm.confirmPassword">
+          <span class="help-block has-error" ng-if="edit.confirmation.$dirty">
+            <span ng-show="edit.password.$error.compareTo">Password must match.</span>
+          </span>
+      </div>
+
+      <!-- N A M E -->
+
+      <!-- checking whether the form "edit" with the "name" property is both $invalid AND $dirty.  If it is
+      insert the "has-error" class on the input field (i.e. insert a red border around the input field)
+      -->
+      <div class="control-group form-group col-md-12"
+           ng-class="{'has-error':edit.name.$invalid &&
+                              edit.name.$dirty}">
+        <label>Your full name</label>
+
+        <!-- For this input field make it required, and have a max length of 50 -->
+        <input type="text" class="form-control" value="<%= me.name %>" name="name" ng-model="editForm.name"
+               ng-maxlength="50">
+
+        <!-- Also, if edit.name.$dirty is true, show the message depending upon the particular properties truthiness (e.g. required
+        and/or maxlength) -->
+          <span class="help-block has-error" ng-if="edit.name.$dirty">
+            <span ng-show="edit.name.$error.maxlength">The name cannot be more than 50 characters.</span>
+          </span>
+      </div>
+
+      <!-- A D D R E S S -->
+
+      <div class="control-group form-group col-md-12"
+           ng-class="{'has-error':edit.address.$invalid &&
+                              edit.address.$dirty}">
+        <label>Address</label>
+
+        <input type="text" class="form-control" value="<%= me.address %>" name="address"
+               ng-model="editForm.address" ng-maxlength="50">
+
+        <!-- Also, if edit.address.$dirty is true, show the message depending upon the particular properties truthiness (e.g. required
+        and/or maxlength) -->
+          <span class="help-block has-error" ng-if="edit.address.$dirty">
+            <span ng-show="edit.address.$error.maxlength">The address cannot be more than 50 characters.</span>
+          </span>
+      </div>
+
+      <!-- P H O N E -->
+
+      <div class="control-group form-group col-md-12"
+           ng-class="{'has-error':edit.phone.$invalid &&
+                              edit.phone.$dirty}">
+        <label>Phone number</label>
+
+        <!-- For this input field make it required, and have a max length of 50 -->
+        <input type="text" class="form-control" value="<%= me.phone %>" name="phone" ng-model="editForm.phone"
+               ng-maxlength="50">
+
+        <!-- Also, if edit.phone.$dirty is true, show the message depending upon the particular properties truthiness (e.g. required
+        and/or maxlength) -->
+          <span class="help-block has-error" ng-if="edit.phone.$dirty">
+            <span ng-show="edit.phone.$error.maxlength">The address cannot be more than 50 characters.</span>
+          </span>
+      </div>
+
+    </div>
+
+    <br/>
+
+    <!-- Disable edit button until the form has no errors -->
+    <button class="btn btn-primary btn-lg btn-block" type="submit" ng-disabled="edit.$invalid">
+      <span ng-show="!editForm.loading">Edit Account</span>
+      <span class="overlord-loading-spinner fa fa-spinner" ng-show="editForm.loading"></span>
+      <span ng-show="editForm.loading">Editing your new account...</span>
+    </button>
+
+    <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
+  </form>
+</div>

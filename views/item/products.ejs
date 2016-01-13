@@ -7,23 +7,35 @@
       <th>Created By</th>
       <th>description</th>
       <th>image</th>
-      <th></th>
+      <th>quantity</th>
       <th></th>
       <th></th>
     </tr>
 
     <% _.each(items, function(item) { %>
-    <tr data-id="<%= item.id %>" data-model="item">
-      <td><%= item.name %></td>
-      <td><%= item.price %></td>
-      <td><%= item.createdBy.username %></td>
-      <td>description</td>
-      <td>image</td>
-      <td><a href="#">Add to cart</a></td>
-      <td><a href="#">Purchase</a></td>
-      <td><a href="#">view</a></td>
-    </tr>
-
+    <div class="simpleCart_shelfItem">
+      <tr data-id="<%= item.id %>" data-model="item">
+        <td class="item_name"><%= item.name %></td>
+        <td class="item_price"><%= item.price %></td>
+        <td><%= item.createdBy.username %></td>
+        <td>description</td>
+        <td>image</td>
+        <td><input type="text" value="0" class="item_Quantity"></td>
+        <td><a class="item_add" href="javascript:;">Add to cart</a></td>
+        <td><a href="#">Purchase</a></td>
+      </tr>
+    </div>
     <% }) %>
   </table>
+  <span class="simpleCart_quantity"></span> items - <span class="simpleCart_total"></span>
+  <a href="javascript:;" class="simpleCart_checkout">Checkout</a>
+
 </div>
+<script>
+  simpleCart({
+    checkout: {
+      type: "PayPal",
+      email: "you@yours.com"
+    }
+  });
+</script>
