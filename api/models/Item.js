@@ -35,6 +35,10 @@ module.exports = {
     boughtIn: {
       collection: 'orderDetail',
       via: 'item'
+    },
+    available: {
+      type: 'boolean',
+      defaultTo: true
     }
   }
 };
