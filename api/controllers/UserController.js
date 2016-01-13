@@ -11,7 +11,8 @@ module.exports = {
   getEditView: function (req, res, next) {
     User.findOne(req.session.me, function foundUser(err, user) {
       if (err) return next(err);
-      // if (!user) return next();
+      if (!user) return next();
+      console.log(user);
       res.view('user/edit', {layout: 'layouts/loggedIn', me: user});
     });
   },
