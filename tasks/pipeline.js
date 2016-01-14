@@ -5,10 +5,11 @@
  * compiled and linked from your views and static HTML files.
  *
  * (Note that you can take advantage of Grunt-style wildcard/glob/splat expressions
- * for matching multiple files.)
+ * for matching multiple files, and the ! prefix for excluding files.)
  */
 
-
+// Path to public folder
+var tmpPath = '.tmp/public/';
 
 // CSS files to inject in order
 //
@@ -32,13 +33,10 @@ var jsFilesToInject = [
 
   // All of the rest of your client-side js files
   // will be injected here in no particular order.
-  'js/public/signup/SignupModule.js',
-  'js/public/homepage/HomepageModule.js',
-  'js/private/product/ProductsModule.js',
-  'js/private/addItem/addItemModule.js',
-  'js/private/dashboard/DashboardModule.js',
-  'js/private/edit/EditModule.js',
-  'js/**/*.js'
+  'js/**/*.js',
+
+  // Use the "exclude" operator to ignore files
+  '!js/pages/**/*.js'
 ];
 
 
@@ -63,9 +61,13 @@ var templateFilesToInject = [
 module.exports.cssFilesToInject = cssFilesToInject.map(function(path) {
   return '.tmp/public/' + path;
 });
-module.exports.jsFilesToInject = jsFilesToInject.map(function(path) {
-  return '.tmp/public/' + path;
-});
+module.exports.jsFilesToInject = jsFilesToInject.map(transformPath);
 module.exports.templateFilesToInject = templateFilesToInject.map(function(path) {
   return 'assets/' + path;
 });
+
+// Transform paths relative to the "assets" folder to be relative to the public
+// folder, preserving "exclude" operators.
+function transformPath(path) {
+  return (path.substring(0,1) == '!') ? ('!' + tmpPath + path.substring(1)) : (tmpPath + path);
+}

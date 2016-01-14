@@ -1,1 +1,9 @@
-angular.module('DashboardModule', ['toastr']);
+var app = angular.module('DashboardModule', ['toastr']);
+
+app.controller('DashboardController', ['$scope', function($scope){
+
+  $scope.submitSearch = function (){
+
+  };
+
+}]);

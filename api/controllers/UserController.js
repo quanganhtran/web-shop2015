@@ -144,13 +144,10 @@ module.exports = {
   ,
 
   /**
-   * UserController.signup()
-   * Register a new user
+   * UserController.logout()
+   * Logout the current user
    *
    * @param  {Object}   req
-   * @param  {Function}   req.param
-   * @prop   {String} username
-   * @prop   {String} password
    * @param  {Function} res
    */
   logout: function (req, res) {
@@ -323,7 +320,7 @@ module.exports = {
           if (err) return next(err);
           if (!user) return next();
           res.view(
-            'user/users', {layout: 'layouts/loggedIn', me: user, users: users}
+            'user/users', {layout: 'layout', me: user, users: users}
           );
         });
 
