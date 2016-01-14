@@ -10,6 +10,7 @@
       <th></th>
       <th></th>
       <th></th>
+      <th>Accept</th>
     </tr>
 
     <% _.each(users, function(user) { %>
@@ -20,9 +21,10 @@
       <td><%= user.role.name %></td>
       <td><a href="#">Show</a></td>
       <td><a href="#">Edit</a></td>
-      <td><a href="#">Delete</a></td>
+      <td><a href="/user/delete/<%= user.id %>">Delete</a></td>
+      <td><p><% if (user.isApplyingForMerchant) { %>wants to be merchant<% } %></p></td>
+      <td><a href="/user/setMerchant/<%= user.id %>"><% if (user.isApplyingForMerchant) { %>accept<% } %></a></td>
     </tr>
-
     <% }) %>
   </table>
 </div>

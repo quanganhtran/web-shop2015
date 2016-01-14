@@ -8,7 +8,7 @@ angular.module('EditModule').controller('EditController', ['$scope', '$http', 't
     loading: false
   }
 
-  $scope.submiteditForm = function() {
+  $scope.submitEditForm = function() {
     $scope.editForm.loading = true;
 
     $http.post('/user/edit', {

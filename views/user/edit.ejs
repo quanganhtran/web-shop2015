@@ -1,5 +1,5 @@
 <div class="EditModule">
-  <div ng-controller="EditController">
+  <div ng-controller="EditController" ng-cloak>
     <!-- edit FORM -->
     <form ng-submit="submitEditForm()" id="edit-form" class="form-edit" name="edit">
       <h2 class="form-edit-heading">Edit an account</h2>
@@ -12,7 +12,7 @@
              ng-class="{'has-error':edit.email.$invalid &&
                               edit.email.$dirty}">
           <label>Email address</label>
-          <input type="email" class="form-control" value="<%= me.email %>" name="email"
+          <input type="email" class="form-control" ng-init="editForm.email='<%= me.email %>'" name="email"
                  ng-model="editForm.email" required>
           <span class="help-block has-error" ng-if="edit.email.$dirty">
             <span ng-show="edit.email.$error.required">Email address is required.</span>
@@ -57,7 +57,7 @@
           <label>Your full name</label>
 
           <!-- For this input field make it required, and have a max length of 50 -->
-          <input type="text" class="form-control" value="<%= me.name %>" name="name" ng-model="editForm.name"
+          <input type="text" class="form-control" ng-init="editForm.name='<%= me.name %>'" name="name" ng-model="editForm.name"
                  ng-maxlength="50">
 
           <!-- Also, if edit.name.$dirty is true, show the message depending upon the particular properties truthiness (e.g. required
@@ -74,7 +74,7 @@
                               edit.address.$dirty}">
           <label>Address</label>
 
-          <input type="text" class="form-control" value="<%= me.address %>" name="address"
+          <input type="text" class="form-control" ng-init="editForm.address='<%= me.address %>'" name="address"
                  ng-model="editForm.address" ng-maxlength="50">
 
           <!-- Also, if edit.address.$dirty is true, show the message depending upon the particular properties truthiness (e.g. required
@@ -92,7 +92,7 @@
           <label>Phone number</label>
 
           <!-- For this input field make it required, and have a max length of 50 -->
-          <input type="text" class="form-control" value="<%= me.phone %>" name="phone" ng-model="editForm.phone"
+          <input type="text" class="form-control" ng-init="editForm.phone='<%= me.phone %>'" name="phone" ng-model="editForm.phone"
                  ng-maxlength="50">
 
           <!-- Also, if edit.phone.$dirty is true, show the message depending upon the particular properties truthiness (e.g. required

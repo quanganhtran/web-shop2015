@@ -40,7 +40,7 @@ module.exports.policies = {
     update: false,
     submit: 'isMerchant',
     modify: 'isOwner',
-    destroy: 'isOwner'
+    destroy: ['orIsOwner', 'orIsAdmin', 'orPolicy']
   }
 
 	// RabbitController: {

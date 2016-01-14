@@ -58,6 +58,8 @@ module.exports.routes = {
   'GET /showUsers': 'UserController.showUsers',
   'GET /user/edit': 'UserController.getEditView',
   'POST /user/edit': 'UserController.edit',
+  'GET /user/setMerchant/:id': 'UserController.setMerchant',
+  'GET /user/delete/:id': 'UserController.delete',
   // Item routes
   'GET /products': 'ItemController.showProducts',
   'GET /addItem': 'ItemController.addItem',
