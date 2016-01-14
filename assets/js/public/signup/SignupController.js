@@ -10,7 +10,6 @@ angular.module('SignupModule').controller('SignupController', ['$scope', '$http'
 
   $scope.submitSignupForm = function() {
     $scope.signupForm.loading = true;
-    console.log('signup ctrl'+$scope.signupForm.isApplyingForMerchant);
     $http.post('/signup', {
       name: $scope.signupForm.name,
       username: $scope.signupForm.username,

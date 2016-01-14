@@ -1,85 +1,76 @@
-<div ng-app="AddItemModule" ng-controller="AddItemController" ng-cloak>
-  <!-- ADD ITEM FORM -->
-  <form ng-submit="submitAddItemForm()" id="sign-up-form" class="form-signin" name="signup">
-    <h2 class="form-signin-heading">Add an item</h2>
+<div class="AddItemModule">
+  <div ng-controller="AddItemController">
+    <!-- ADD ITEM FORM -->
+    <form ng-submit="submitAddItemForm()" id="add-item-form" class="form-signin" name="signup">
+      <h2 class="form-signin-heading">Add an item</h2>
 
-    <div class="row">
+      <div class="row">
 
-      <!-- N A M E -->
+        <!-- N A M E -->
 
-      <div class="control-group form-group col-md-12"
-           ng-class="{'has-error':addItem.name.$invalid &&
+        <div class="control-group form-group col-md-12"
+             ng-class="{'has-error':addItem.name.$invalid &&
                                 addItem.name.$dirty}">
-        <label>Item name</label>
-        <input type="text" class="form-control" placeholder="e.g. Nunchucks" name="name" ng-model="addItemForm.name"
-               ng-maxlength="50" required>
+          <label>Item name</label>
+          <input type="text" class="form-control" placeholder="e.g. Nunchucks" name="name" ng-model="addItemForm.name"
+                 ng-maxlength="50" required>
           <span class="help-block has-error" ng-if="signup.name.$dirty">
             <span ng-show="addItem.name.$error.required">Name is required.</span>
             <span ng-show="addItem.name.$error.maxlength">The name cannot be more than 50 characters.</span>
           </span>
-      </div>
+        </div>
 
-      <!-- P R I C E -->
+        <!-- P R I C E -->
 
-      <div class="control-group form-group col-md-12"
-           ng-class="{'has-error':addItem.price.$invalid &&
+        <div class="control-group form-group col-md-12"
+             ng-class="{'has-error':addItem.price.$invalid &&
                               addItem.price.$dirty}">
-        <label>Price in Euro(€)</label>
-        <input type="number" min="0" step="any" class="form-control" placeholder="19.9" name="price"
-               ng-model="addItemForm.price" required>
+          <label>Price in Euro(€)</label>
+          <input type="number" min="0" step="any" class="form-control" placeholder="19.9" name="price"
+                 ng-model="addItemForm.price" required>
           <span class="help-block has-error" ng-if="addItem.email.$dirty">
             <span ng-show="addItem.email.$error.required">price is required.</span>
           </span>
-      </div>
+        </div>
 
-      <!-- Description -->
+        <!-- Description -->
 
-      <div class="control-group form-group col-md-12"
-           ng-class="{'has-error':addItem.password.$invalid &&
+        <div class="control-group form-group col-md-12"
+             ng-class="{'has-error':addItem.password.$invalid &&
                               addItem.password.$dirty}">
-        <label>Item description</label>
-        <!-- Added the compareTo directive that compares the passowrds -->
-        <input type="text" class="form-control" placeholder="description about your product" name="description"
-               ng-model="addItemForm.description" ng-maxlength="100">
+          <label>Item description</label>
+          <!-- Added the compareTo directive that compares the passowrds -->
+          <input type="text" class="form-control" placeholder="description about your product" name="description"
+                 ng-model="addItemForm.description" ng-maxlength="100">
+        </div>
+
+        <!-- imagePath -->
+
+        <div class="control-group form-group col-md-12">
+          <label>Upload item image</label>
+          <input type="file" class="form-control" placeholder="nunchuck.jpg" name="imagePath"
+                 ng-model="addItemForm.imagePath">
+        </div>
+
+        <!--manufactured date -->
+
+        <div class="control-group form-group col-md-12">
+          <label>Manufactured date</label>
+          <input type="date" class="form-control" placeholder="dd/mm/yyyy" name="manufacturedDate"
+                 ng-model="addItemForm.manufacturedDate">
+        </div>
       </div>
 
-      <!-- imagePath -->
+      <br/>
 
-      <div class="control-group form-group col-md-12">
-        <label>Upload item image</label>
-        <input type="file" class="form-control" placeholder="nunchuck.jpg" name="imagePath"
-               ng-model="addItemForm.imagePath" >
-      </div>
+      <!-- Disable signup button until the form has no errors -->
+      <button class="btn btn-primary btn-lg btn-block" type="submit" ng-disabled="signup.$invalid">
+        <span ng-show="!addItemForm.loading">Add item</span>
+        <span class="overlord-loading-spinner fa fa-spinner" ng-show="addItemForm.loading"></span>
+        <span ng-show="addItemForm.loading">Creating new item...</span>
+      </button>
 
-      <!--manufactured date -->
-
-      <div class="control-group form-group col-md-12">
-        <label>Manufactured date</label>
-        <input type="date" class="form-control" placeholder="dd/mm/yyyy" name="manufacturedDate"
-               ng-model="addItemForm.manufacturedDate">
-      </div>
-    </div>
-
-    <br/>
-
-    <!-- Disable signup button until the form has no errors -->
-    <button class="btn btn-primary btn-lg btn-block" type="submit" ng-disabled="signup.$invalid">
-      <span ng-show="!addItemForm.loading">Add item</span>
-      <span class="overlord-loading-spinner fa fa-spinner" ng-show="addItemForm.loading"></span>
-      <span ng-show="addItemForm.loading">Creating new item...</span>
-    </button>
-
-    <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
-  </form>
-
-  <div class="container">
-    <hr>
-    <footer class="footer pull-right">
-      <div>
-        <a href="https://github.com/wontheone1">Won's github page</a>
-
-        <div>Web programming 2015, final project by Anh, Won</div>
-      </div>
-    </footer>
+      <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
+    </form>
   </div>
 </div>

@@ -1,41 +1,43 @@
-<div class="container">
-  <h3>Products</h3>
-  <table class="table">
-    <tr>
-      <th>Product Name</th>
-      <th>Price</th>
-      <th>Created By</th>
-      <th>description</th>
-      <th>image</th>
-      <th>quantity</th>
-      <th></th>
-      <th></th>
-    </tr>
-
-    <% _.each(items, function(item) { %>
-    <div class="simpleCart_shelfItem">
-      <tr data-id="<%= item.id %>" data-model="item">
-        <td class="item_name"><%= item.name %></td>
-        <td class="item_price"><%= item.price %></td>
-        <td><%= item.createdBy.username %></td>
-        <td>description</td>
-        <td>image</td>
-        <td><input type="text" value="0" class="item_Quantity"></td>
-        <td><a class="item_add" href="javascript:;">Add to cart</a></td>
-        <td><a href="#">Purchase</a></td>
+<div class="ProductsModule">
+  <div class="container">
+    <h3>Products</h3>
+    <table class="table">
+      <tr>
+        <th>Product Name</th>
+        <th>Price</th>
+        <th>Created By</th>
+        <th>description</th>
+        <th>image</th>
+        <th>quantity</th>
+        <th></th>
+        <th></th>
       </tr>
-    </div>
-    <% }) %>
-  </table>
-  <span class="simpleCart_quantity"></span> items - <span class="simpleCart_total"></span>
-  <a href="javascript:;" class="simpleCart_checkout">Checkout</a>
 
+      <% _.each(items, function(item) { %>
+      <div class="simpleCart_shelfItem">
+        <tr data-id="<%= item.id %>" data-model="item">
+          <td class="item_name"><%= item.name %></td>
+          <td class="item_price"><%= item.price %></td>
+          <td><%= item.createdBy.username %></td>
+          <td>description</td>
+          <td>image</td>
+          <td><input type="text" value="0" class="item_Quantity"></td>
+          <td><a class="item_add" href="javascript:;">Add to cart</a></td>
+          <td><a href="#">Purchase</a></td>
+        </tr>
+      </div>
+      <% }) %>
+    </table>
+    <span class="simpleCart_quantity"></span> items - <span class="simpleCart_total"></span>
+    <a href="javascript:;" class="simpleCart_checkout">Checkout</a>
+
+  </div>
+  <script>
+    simpleCart({
+      checkout: {
+        type: "PayPal",
+        email: "you@yours.com"
+      }
+    });
+  </script>
 </div>
-<script>
-  simpleCart({
-    checkout: {
-      type: "PayPal",
-      email: "you@yours.com"
-    }
-  });
-</script>

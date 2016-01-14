@@ -12,7 +12,6 @@ module.exports = {
     User.findOne(req.session.me, function foundUser(err, user) {
       if (err) return next(err);
       if (!user) return next();
-      console.log(user);
       res.view('user/edit', {layout: 'layouts/loggedIn', me: user});
     });
   },
@@ -223,8 +222,6 @@ signup: function (req, res) {
 
             // Create a User with the params sent from
             // the sign-up form --> signup.ejs
-            console.log(req.param('isApplyingForMerchant') + typeof(req.param('isApplyingForMerchant')));
-            console.log('is same? ' + req.param('isApplyingForMerchant') === true);
             User.create({
               name: req.param('name'),
               username: req.param('username'),
