@@ -43,9 +43,6 @@ module.exports = {
         },
         // OK.
         success: function (encryptedPassword) {
-        },
-        error: function (err) {
-          return res.negotiate(err);
         }
       })
     }
@@ -65,7 +62,7 @@ module.exports = {
       if (err) {
 
         console.log("err: ", err);
-        console.log("err.invalidAttributes: ", err.invalidAttributes)
+        console.log("err.invalidAttributes: ", err.invalidAttributes);
 
         // If this is a uniqueness error about the email attribute,
         // send back an easily parseable status code.
@@ -105,6 +102,18 @@ module.exports = {
    * `UserController.login()`
    */
   login: function (req, res) {
+    if (req.session.me) {
+      // The user has already logged in.
+      User.findOne(req.session.me).exec(function (err, user){
+        if (err) return res.negotiate(err);
+        if (!user) {
+          req.session.me = null; // Session is no longer valid if the logged in user does not exist.
+          return res.ok('Session is no longer valid.');
+        }
+        delete user.encryptedPassword;
+        return res.ok(user);
+      });
+    }
 
     // Try to look up user using the provided username
     User.findOne({
@@ -134,9 +143,10 @@ module.exports = {
 
           // Store user id in the user session
           req.session.me = user.id;
+          delete user.encryptedPassword;
           req.session.user = user;
           // All done- let the client know that everything worked.
-          return res.ok();
+          return res.ok(user);
         }
       });
     });
@@ -320,7 +330,7 @@ module.exports = {
           if (err) return next(err);
           if (!user) return next();
           res.view(
-            'user/users', {layout: 'layout', me: user, users: users}
+            'user/users', {layout: 'layouts/loggedIn', me: user, users: users}
           );
         });
 

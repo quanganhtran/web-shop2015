@@ -1,9 +1,55 @@
 /**
  * Created by Anh on 12/9/2015.
  */
-var app = angular.module('sessionModule', []);
+var app = angular.module('SessionModule', ['toastr', 'compareTo', 'ngCookies']);
 
-app.controller('sessionController', function($scope, $http) {
+app.controller('SessionController', ['$scope', '$http', '$cookies', 'toastr', function($scope, $http, $cookies, toastr) {
+
+  //$http.put('/login', function() {
+  //
+  //});
+
+  $scope.submitLoginForm = function (){
+
+    // Set the loading state (i.e. show loading spinner)
+    $scope.loginForm.loading = true;
+
+    // Submit request to Sails.
+    $http.put('/login', {
+        username: $scope.loginForm.username,
+        password: $scope.loginForm.password
+      })
+      .then(function onSuccess(user) {
+        //$cookies.put('name', user.name);
+        // Refresh the page now that we've been logged in.
+        window.location = '/';
+      })
+      .catch(function onError(sailsResponse) {
+
+        // Handle known error type(s).
+        // Invalid username / password combination.
+        if (sailsResponse.status === 400 || 404) {
+          // $scope.loginForm.topLevelErrorMessage = 'Invalid email/password combination.';
+          //
+          toastr.error('Invalid username/password combination.', 'Error', {
+            closeButton: true
+          });
+          return;
+        }
+
+        toastr.error('An unexpected error occurred, please try again.', 'Error', {
+          closeButton: true
+        });
+        return;
+
+      })
+      .finally(function eitherWay(){
+        $scope.loginForm.loading = false;
+      });
+  };
+
+
+
   $scope.showForm = false;
   $http.post('/api/login').then(
     function (response) {$scope.status = response.data.username;},
@@ -22,4 +68,4 @@ app.controller('sessionController', function($scope, $http) {
       }
     )
   }
-});
+}]);

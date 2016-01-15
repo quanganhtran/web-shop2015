@@ -1,7 +1,7 @@
-var app = angular.module('userList', []);
+var app = angular.module('UserList', ['IdentityModule']);
 
-app.controller('userListController', function($scope, $http) {
-  //$http.get('/api/user').then(function (response) {
-  //  $scope.users = response.data;
-  //});
+app.controller('UserListController', function($scope, $http) {
+  $http.get('/api/user').then(function (response) {
+    $scope.users = response.data;
+  });
 });
