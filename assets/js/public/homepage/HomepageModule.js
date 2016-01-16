@@ -1,4 +1,4 @@
-var app = angular.module('HomepageModule', ['toastr', 'compareTo']);
+var app = angular.module('HomepageModule', ['toastr', 'compareTo', 'IdentityModule']);
 
 app.controller('HomepageController', ['$scope', '$http', 'toastr', function($scope, $http, toastr){
 

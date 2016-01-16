@@ -113,43 +113,43 @@ module.exports = {
         delete user.encryptedPassword;
         return res.ok(user);
       });
-    }
+    } else {
+      // Try to look up user using the provided username
+      User.findOne({
+        username: req.param('username')
+      }, function foundUser(err, user) {
+        if (err) return res.negotiate(err);
+        if (!user) return res.notFound();
 
-    // Try to look up user using the provided username
-    User.findOne({
-      username: req.param('username')
-    }, function foundUser(err, user) {
-      if (err) return res.negotiate(err);
-      if (!user) return res.notFound();
+        // Compare password attempt from the form params to the encrypted password
+        // from the database (`user.password`)
+        require('machinepack-passwords').checkPassword({
+          passwordAttempt: req.param('password'),
+          encryptedPassword: user.encryptedPassword
+        }).exec({
 
-      // Compare password attempt from the form params to the encrypted password
-      // from the database (`user.password`)
-      require('machinepack-passwords').checkPassword({
-        passwordAttempt: req.param('password'),
-        encryptedPassword: user.encryptedPassword
-      }).exec({
+          error: function (err) {
+            return res.negotiate(err);
+          },
 
-        error: function (err) {
-          return res.negotiate(err);
-        },
+          // If the password from the form params doesn't checkout w/ the encrypted
+          // password from the database...
+          incorrect: function () {
+            return res.notFound();
+          },
 
-        // If the password from the form params doesn't checkout w/ the encrypted
-        // password from the database...
-        incorrect: function () {
-          return res.notFound();
-        },
+          success: function () {
 
-        success: function () {
-
-          // Store user id in the user session
-          req.session.me = user.id;
-          delete user.encryptedPassword;
-          req.session.user = user;
-          // All done- let the client know that everything worked.
-          return res.ok(user);
-        }
+            // Store user id in the user session
+            req.session.me = user.id;
+            delete user.encryptedPassword;
+            req.session.user = user;
+            // All done- let the client know that everything worked.
+            return res.ok(user);
+          }
+        });
       });
-    });
+    }
   }
   ,
 

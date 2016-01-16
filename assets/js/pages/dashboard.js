@@ -1,1 +1,1 @@
-var app = angular.module('DashboardModule',['IdentityModule']);
+var app = angular.module('DashboardModule',['HomepageModule']);

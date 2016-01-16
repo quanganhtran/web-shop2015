@@ -28,7 +28,7 @@ var jsFilesToInject = [
   'js/dependencies/sails.io.js',
 
   // Dependencies like jQuery, or Angular are brought in here
-  'js/dependencies/angular.1.3.js',
+  'js/dependencies/angular.js',
   'js/dependencies/**/*.js',
 
   // All of the rest of your client-side js files
@@ -36,7 +36,8 @@ var jsFilesToInject = [
   'js/**/*.js',
 
   // Use the "exclude" operator to ignore files
-  '!js/pages/**/*.js'
+  '!js/pages/**/*.js',
+  '!js/dependencies/*.min.js'
 ];
 
 
