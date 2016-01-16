@@ -1,1 +1,1 @@
-var app = angular.module('ProfileModule',['IdentityModule']);
+var app = angular.module('ProfileModule',['SessionModule']);

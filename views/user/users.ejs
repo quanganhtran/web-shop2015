@@ -22,10 +22,8 @@
       <td><a href="#">Show</a></td>
       <td><a href="#">Edit</a></td>
       <td>
-        <a class="suspend" data-id="{{ u.id }}">
-          <span ng-show="u.isSuspended">Unsuspend</span>
-          <span ng-show="!u.isSuspended">Suspend</span>
-        </a>
+        <a class="suspend" ng-show="u.isSuspended" data-id="{{ u.id }}">Unsuspend</a>
+        <a class="suspend" ng-show="!u.isSuspended" data-id="{{ u.id }}">Suspend</a>
       </td>
       <td>
         <p>
@@ -33,9 +31,7 @@
         </p>
       </td>
       <td>
-        <a class="setMerchant" data-id="{{ u.id }}">
-          <span ng-show="u.isApplyingForMerchant">Accept as merchant</span>
-        </a>
+        <a class="setMerchant" ng-show="u.isApplyingForMerchant" data-id="{{ u.id }}">Accept as merchant</a>
       </td>
     </tr>
 
@@ -43,8 +39,8 @@
 </div>
 <script src="js/pages/userList.js"></script>
 <script>
-  $(function () {
-    $('.setMerchant').on('click', function () {
+  $(document).ready(function(){
+    $('.setMerchant').click(function () {
       var id = $(this).data("id");
       console.log(id);
       $.get('/user/setMerchant/' + id, function (data, status) {
@@ -52,7 +48,7 @@
         window.location = '/showUsers';
       });
     });
-    $('.suspend').on('click', function () {
+    $('.suspend').click(function () {
       var id = $(this).data("id");
       console.log(id);
       $.get('/user/suspend/' + id, function (data, status) {
