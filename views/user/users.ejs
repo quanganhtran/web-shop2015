@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container UsersModule" ng-controller="UsersController">
   <h3>Users</h3>
   <table class="table">
     <tr>
@@ -21,10 +21,52 @@
       <td><%= user.role.name %></td>
       <td><a href="#">Show</a></td>
       <td><a href="#">Edit</a></td>
-      <td><a href="/user/delete/<%= user.id %>">Delete</a></td>
-      <td><p><% if (user.isApplyingForMerchant) { %>wants to be merchant<% } %></p></td>
-      <td><a href="/user/setMerchant/<%= user.id %>"><% if (user.isApplyingForMerchant) { %>accept<% } %></a></td>
+      <td>
+        <a class="suspend" data-id="<%= user.id %>">
+          <% if (user.isSuspended) { %>
+          Unsuspend
+          <% } else { %>
+          Suspend
+          <% } %>
+        </a>
+      </td>
+      <td>
+        <p>
+          <% if (user.isApplyingForMerchant) { %>
+          wants to be merchant
+          <% } %>
+        </p>
+      </td>
+      <td>
+        <a class="setMerchant" data-id="<%= user.id %>">
+          <% if (user.isApplyingForMerchant) { %>
+          Accept as merchant
+          <% } %>
+        </a>
+      </td>
     </tr>
     <% }) %>
   </table>
 </div>
+<script>
+  $(function () {
+    $('.setMerchant').on('click', function () {
+      var id = $(this).data("id");
+      console.log(id);
+      $.get('/user/setMerchant/' + id, function (data, status) {
+        console.log(status);
+        window.location = '/showUsers';
+      });
+    });
+    $('.suspend').on('click', function () {
+      var id = $(this).data("id");
+      console.log(id);
+      $.get('/user/suspend/' + id, function (data, status) {
+        console.log(status);
+        console.log(data);
+        $.post('/item/ban', data);
+      });
+      window.location = '/showUsers';
+    });
+  });
+</script>

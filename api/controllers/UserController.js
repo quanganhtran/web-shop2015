@@ -292,22 +292,24 @@ module.exports = {
    * @param  {Function} res
    */
   setMerchant: function (req, res) {
-    // TODO: Implement the function
-    User.findOne(req.param('id')).exec(function (err, user) {
+    User.findOne(req.param('id')).exec(function (err, user){
       if (err) return res.negotiate(err);
       if (!user) return res.notFound('User not found.');
       if (user.role == 1) return res.forbidden('The action requested cannot be performed on this user.');
+      var newRole = user.role == 3 ? 2 : 3;
+      console.log('user'+user.role);
+      console.log('newrole'+newRole);
       User.update(req.param('id'), {
-        role: 3,
+        role: newRole,
         isApplyingForMerchant: false
-      }).exec(function (err, user) {
+      }).exec(function (err, user){
         if (err) return res.negotiate(err);
-        var msg = 'Merchant privilege has been granted for this user.';
-        res.redirect('/showUsers');
+        var msg = user.role == 3 ? 'Merchant privilege has been granted for this user.' : 'Merchant privilege has been revoked from this user.';
+        console.log('newly set role'+user.role);
+        return res.ok(msg);
       });
     });
-  }
-  ,
+  },
 
   showUsers: function (req, res, next) {
     // Get an arraya of all users in the User collection(e.g. table)
@@ -322,29 +324,34 @@ module.exports = {
             'user/users', {layout: 'layouts/loggedIn', me: user, users: users}
           );
         });
-
       }
     )
   },
 
-  delete: function (req, res) {
+  suspend: function (req, res) {
     // Look up the user record from the database which is
-    // referenced by the id in the user session (req.session.me)
+    // referenced by the id
     User.findOne(req.param('id')).exec(function foundUser(err, user) {
       if (user.role == 1) return res.forbidden('The action requested cannot be performed on this user.');
       else {
-        User.destroy({id: req.param('id')}, function destoyedUser(err, user) {
+        var isSuspended;
+        if (user.isSuspended === false ) {
+          isSuspended = true;
+        } else {
+          isSuspended = false;
+        }
+        User.update({id: req.param('id')}, {isSuspended:isSuspended}).exec(function afterwards(err, updated){
           if (err) return res.negotiate(err);
           // If session refers to a user who no longer exists, still allow logout.
           if (!user) {
             sails.log.verbose('Session refers to a user who no longer exists.');
-            res.redirect('/showUsers');
+            return res.badRequest('Session refers to a user who no longer exists.');
           }
-        })
-        Item.destroy({createdBy: req.param('id')}, function destroyedItems(err, items) {
-          if (err) return res.negotiate(err);
-          res.redirect('/showUsers');
+          console.log('Updated user to is suspended value = ' + updated[0].isSuspended);
         });
+
+        // also ban the items from the suspended user
+        res.json({createdBy:req.param('id'), isSuspended:isSuspended});
       }
     });
   },
@@ -371,7 +378,5 @@ module.exports = {
       return res.view('profile', {user: user, req: req});
     });
   }
-
-}
-;
+};
 

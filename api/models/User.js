@@ -62,6 +62,10 @@ module.exports = {
     isApplyingForMerchant: {
       type: 'boolean',
       defaultsTo: false
+    },
+    isSuspended: {
+      type: 'boolean',
+      defaultsTo: false
     }
   }
 

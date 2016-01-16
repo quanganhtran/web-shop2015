@@ -1,0 +1,27 @@
+<script type="text/javascript">
+    simpleCart.email = "pghoou@hotmail.com";
+    simpleCart.cartHeaders = ['Image', 'Name', 'Price', 'Options', 'Quantity_input', 'Total'];
+    simpleCart({
+        // array representing the format and columns of the cart,
+        // see the cart columns documentation
+        cartColumns: [
+            { attr: "name", label: "Name"},
+            { view: "currency", attr: "price", label: "Price"},
+            { view: "decrement", label: false},
+            { attr: "quantity", label: "Quantity"},
+            { view: "increment", label: false},
+            { view: "currency", attr: "total", label: "SubTotal" },
+            { view: "remove", text: "Remove", label: false}
+        ],
+
+        cartStyle: "table",
+
+        currency: "EUR",
+
+        checkout: {
+            type: "PayPal",
+            email: "you@yours.com"
+        }
+    });
+</script>
+<table class="simpleCart_items"></table>

@@ -22,48 +22,57 @@
 
 module.exports.routes = {
 
-  /***************************************************************************
-  *                                                                          *
-  * Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, *
-  * etc. depending on your default view engine) your home page.              *
-  *                                                                          *
-  * (Alternatively, remove this and add an `index.html` file in your         *
-  * `assets` directory)                                                      *
-  *                                                                          *
-  ***************************************************************************/
+    /***************************************************************************
+     *                                                                          *
+     * Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, *
+     * etc. depending on your default view engine) your home page.              *
+     *                                                                          *
+     * (Alternatively, remove this and add an `index.html` file in your         *
+     * `assets` directory)                                                      *
+     *                                                                          *
+     ***************************************************************************/
 
-  'GET /': 'PageController.showHomePage',
+    'GET /': 'PageController.showHomePage',
 
 
-  /***************************************************************************
-  *                                                                          *
-  * Custom routes here...                                                    *
-  *                                                                          *
-  * If a request to a URL doesn't match any of the custom routes above, it   *
-  * is matched against Sails route blueprints. See `config/blueprints.js`    *
-  * for configuration options and examples.                                  *
-  *                                                                          *
-  ***************************************************************************/
+    /***************************************************************************
+     *                                                                          *
+     * Custom routes here...                                                    *
+     *                                                                          *
+     * If a request to a URL doesn't match any of the custom routes above, it   *
+     * is matched against Sails route blueprints. See `config/blueprints.js`    *
+     * for configuration options and examples.                                  *
+     *                                                                          *
+     ***************************************************************************/
 
-  /*
-   * API routes here
-   * Custom API routes always return JSON. Default blueprints are also available.
-   */
-  // User routes
-  'GET /signup': {view: 'signup'},
-  'POST /signup': 'UserController.signup',
-  'PUT /login': 'UserController.login',
-  'GET /profile': 'UserController.showProfile',
-  'GET /logout': 'UserController.logout',
-  'GET /showUsers': 'UserController.showUsers',
-  'GET /user/edit': 'UserController.getEditView',
-  'POST /user/edit': 'UserController.edit',
-  'GET /user/setMerchant/:id': 'UserController.setMerchant',
-  'GET /user/delete/:id': 'UserController.delete',
-  // Item routes
-  'GET /products': 'ItemController.showProducts',
-  'GET /addItem': 'ItemController.addItem',
-  'POST /addItem': 'ItemController.submit'
+    /*
+     * API routes here
+     * Custom API routes always return JSON. Default blueprints are also available.
+     */
+    // User routes
+    'GET /signup': {view: 'signup'},
+    'POST /signup': 'UserController.signup',
+    'PUT /login': 'UserController.login',
+    'GET /profile': 'UserController.showProfile',
+    'GET /logout': 'UserController.logout',
+    'GET /showUsers': 'UserController.showUsers',
+    'GET /user/edit': 'UserController.getEditView',
+    'POST /user/edit': 'UserController.edit',
+    'GET /user/setMerchant/:id': 'UserController.setMerchant',
+    'GET /user/suspend/:id': 'UserController.suspend',
+    // Item routes
+    'GET /products': 'ItemController.showProducts',
+    'GET /addItem': 'ItemController.addItem',
+    'POST /addItem': 'ItemController.submit',
+    'POST /item/ban': 'ItemController.banItem',
+    'GET /cart': {
+        view: 'user/cart', locals: {
+            layout: 'layouts/loggedin'
+        }
+    },
+    'POST /purchase': {
+
+    }
 
   /*
    * Web routes here
@@ -71,4 +80,5 @@ module.exports.routes = {
    */
 
 
-};
+}
+;

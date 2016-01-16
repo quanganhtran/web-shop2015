@@ -6,10 +6,8 @@ angular.module('HomepageModule').controller('HomepageController', ['$scope', '$h
 	}
 
 	$scope.submitLoginForm = function (){
-
     // Set the loading state (i.e. show loading spinner)
     $scope.loginForm.loading = true;
-
     // Submit request to Sails.
     $http.put('/login', {
       username: $scope.loginForm.username,
@@ -20,7 +18,6 @@ angular.module('HomepageModule').controller('HomepageController', ['$scope', '$h
       window.location = '/';
     })
     .catch(function onError(sailsResponse) {
-
       // Handle known error type(s).
       // Invalid username / password combination.
       if (sailsResponse.status === 400 || 404) {
@@ -31,17 +28,13 @@ angular.module('HomepageModule').controller('HomepageController', ['$scope', '$h
         });
         return;
       }
-
 				toastr.error('An unexpected error occurred, please try again.', 'Error', {
 					closeButton: true
 				});
 				return;
-
     })
     .finally(function eitherWay(){
       $scope.loginForm.loading = false;
     });
   };
-
-
 }]);

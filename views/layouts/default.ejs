@@ -43,7 +43,7 @@
             <input ng-model="loginForm.password" type="password" placeholder="Password" name="password"
                    class="form-control">
           </div>
-          <button type="submit" class="btn btn-success">
+          <button type="submit" class="btn btn-success" onclick="simpleCart.empty();">
             <span ng-show="!loginForm.loading">Sign in</span>
             <span ng-show="loginForm.loading" class="fa fa-spinner"></span>
             <span ng-show="loginForm.loading">Signing in...</span>
@@ -83,6 +83,7 @@
 <script src="/js/pages/homepage.js"></script>
 <script src="/js/pages/sessionModule.js"></script>
 <script src="/js/pages/sessionService.js"></script>
+<script src="/js/private/UsersModule.js"></script>
 <script src="/js/private/addItem/addItemController.js"></script>
 <script src="/js/private/dashboard/DashboardController.js"></script>
 <script src="/js/private/edit/EditController.js"></script>
