@@ -1,0 +1,99 @@
+<div class="container-fluid" ng-controller="IdentityController">
+  <!-- Creates the navbar for non-user -->
+  <nav class="navbar navbar-inverse" ng-show="!me">
+    <!-- This creates the mechanism for collapse button -->
+    <button type="button" class="navbar-toggle" data-toggle="collapse" ng-init="navCollapsed = true"
+            ng-click="navCollapsed = !navCollapsed">
+      <!-- This controls the number of lines in the image when the nav collapse -->
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+
+    <!-- This is the brand on the left-hand side. -->
+    <a class="navbar-brand" href="/#"> 'Asian sweatshop'</a>
+
+    <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
+      <form ng-submit="submitLoginForm()" class="navbar-form navbar-right">
+
+        <div class="form-group">
+          <input ng-model="loginForm.username" type="text" placeholder="Username" name="username"
+                 class="form-control">
+        </div>
+        <div class="form-group">
+          <input ng-model="loginForm.password" type="password" placeholder="Password" name="password"
+                 class="form-control">
+        </div>
+        <button type="submit" class="btn btn-success">
+          <span ng-show="!loginForm.loading">Sign in</span>
+          <span ng-show="loginForm.loading" class="fa fa-spinner"></span>
+          <span ng-show="loginForm.loading">Signing in...</span>
+        </button>
+        <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
+      </form>
+    </div>
+  </nav>
+  <!-- Creates the navbar for logged in user -->
+  <nav class="navbar navbar-inverse" ng-show="me">
+    <!-- This creates the mechanism for collapse button -->
+    <button type="button" class="navbar-toggle" data-toggle="collapse" ng-init="navCollapsed = true"
+            ng-click="navCollapsed = !navCollapsed">
+      <!-- This controls the number of lines in the image when the nav collapse -->
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+
+    <!-- This is the brand on the left-hand side. -->
+    <a class="navbar-brand" href="/#"> 'Asian sweatshop'</a>
+
+    <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <form role="search" class="navbar-form navbar-left" ng-submit="submitSearch()">
+            <div class="form-group">
+              <input type="text" placeholder="Search" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-default">Search</button>
+          </form>
+        </li>
+        <!-- navbar-right pulls this element right -->
+        <!-- Using ng-show instead of ng-if because we need this mark-up to be in the dom when signup controller
+        fires.  If it's not there (which it wouldn't be in the case of ng-if) then the scope of the signup
+        controller will not be tied to this element. -->
+        <!-- Everyone's interface -->
+        <li>
+          <a href="/profile">Profile</a>
+        </li>
+        <li>
+          <a href="/products">Products</a>
+        </li>
+        <!-- Admin interface -->
+        <li ng-if="me.role === 1">
+          <a href="/showUsers">Manage users</a>
+        </li>
+        <!-- Merchant interface -->
+        <li ng-if="me.role === 3">
+          <a href="/addItem">Add items</a>
+        </li>
+        <li>
+          <a href="#">Manage items</a>
+        </li>
+        <!-- Everyone's interface -->
+        <li>
+          <a href="/#">My Cart</a>
+        </li>
+        <li>
+          <a href="/#">My order</a>
+        </li>
+        <li>
+          <a href="/logout">Sign-out</a>
+        </li>
+        <!-- <a ng-controller="signinController" class="btn btn-default navbar-btn navbar-right" href="#" ng-if="!isAuthenticated">sign-in</a> -->
+        <!-- Using ng-show instead of ng-if because we need this mark-up to be in the dom when signup controller
+        fires.  If it's not there (which it wouldn't be in the case of ng-if) then the scope of the signup
+        controller will not be tied to this element. -->
+      </ul>
+    </div>
+  </nav>
+</div>

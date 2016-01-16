@@ -143,13 +143,10 @@ module.exports = {
   ,
 
   /**
-   * UserController.signup()
-   * Register a new user
+   * UserController.logout()
+   * Logout the current user
    *
    * @param  {Object}   req
-   * @param  {Object}   req.params
-   *                     • username {String}
-   *                     • password {String}
    * @param  {Function} res
    */
   logout: function (req, res) {
@@ -180,13 +177,13 @@ module.exports = {
    * Register a new user
    *
    * @param  {Object}   req
-   * @param  {Object}   req.params
-   *                     • username {String}
-   *                     • password {String}
-   *                     • address {String}
-   *                     • phone {String}
-   *                     • name {String}
-   *                     • email {String}
+   * @param  {Function} req.param
+   * @prop   {String}   username
+   * @prop   {String}   password
+   * @prop   {String}   address
+   * @prop   {String}   phone
+   * @prop   {String}   name
+   * @prop   {String}   email
    * @param  {Function} res
    */
   signup: function (req, res) {

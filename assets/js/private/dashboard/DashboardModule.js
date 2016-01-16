@@ -1,6 +1,9 @@
-angular.module('DashboardModule', ['toastr']);
+var app = angular.module('DashboardModule', ['toastr']);
 
-angular.element(document).ready(function() {
-  var DashboardModule = document.getElementsByClassName("DashboardModule");
-  angular.bootstrap(DashboardModule, ["DashboardModule"]);
-});
+app.controller('DashboardController', ['$scope', function($scope){
+
+  $scope.submitSearch = function (){
+
+  };
+
+}]);

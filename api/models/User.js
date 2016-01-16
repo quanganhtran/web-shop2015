@@ -67,6 +67,25 @@ module.exports = {
       type: 'boolean',
       defaultsTo: false
     }
+  },
+
+  /**
+   * Check validness of a login using the provided inputs.
+   * But encrypt the password first.
+   *
+   * @param {Object} inputs
+   * @param {String} inputs.username
+   * @param {String} inputs.password
+   * @param {Function} cb
+   */
+
+  attemptLogin: function (inputs, cb) {
+    User.findOne({
+        username: inputs.username,
+        // TODO: But encrypt the password first
+        password: inputs.password
+      })
+      .exec(cb);
   }
 
 };

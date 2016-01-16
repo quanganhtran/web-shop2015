@@ -17,7 +17,8 @@ module.exports = {
       required : true
     },
     delivered: {
-      type: 'boolean'
+      type: 'boolean',
+      defaultTo: false
     }
   },
 
