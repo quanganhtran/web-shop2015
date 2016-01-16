@@ -22,26 +22,19 @@
       <td><a href="#">Show</a></td>
       <td><a href="#">Edit</a></td>
       <td>
-        <a class="suspend" data-id="<%= user.id %>">
-          <% if (user.isSuspended) { %>
-          Unsuspend
-          <% } else { %>
-          Suspend
-          <% } %>
+        <a class="suspend" data-id="{{ u.id }}">
+          <span ng-show="u.isSuspended">Unsuspend</span>
+          <span ng-show="!u.isSuspended">Suspend</span>
         </a>
       </td>
       <td>
         <p>
-          <% if (user.isApplyingForMerchant) { %>
-          wants to be merchant
-          <% } %>
+          <span ng-show="u.isApplyingForMerchant">wants to be merchant</span>
         </p>
       </td>
       <td>
-        <a class="setMerchant" data-id="<%= user.id %>">
-          <% if (user.isApplyingForMerchant) { %>
-          Accept as merchant
-          <% } %>
+        <a class="setMerchant" data-id="{{ u.id }}">
+          <span ng-show="u.isApplyingForMerchant">Accept as merchant</span>
         </a>
       </td>
     </tr>
