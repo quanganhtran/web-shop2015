@@ -1,1 +1,4 @@
-var app = angular.module('LandingModule',['HomepageModule', 'SignupModule']);
+/**
+ * Created by Anh on 12/9/2015.
+ */
+var app = angular.module('LandingModule', ['SessionModule']);
