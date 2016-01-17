@@ -1,11 +1,19 @@
 <div ng-app="LandingModule">
 <%- partial('layouts/header') %>
-<div class=" col-md-8 col-md-offset-2">
+<div class="col-md-8 col-md-offset-2">
   <div class="jumbotron">
     <h1>Asian sweatshop...</h1>
 
     <h2>...selling anything useful cheaper than the prices of the european counterparts since 1899.</h2>
     <a href="/signup" class="btn btn-lg btn-success">Sign up now!</a>
+  </div>
+  <div ng-controller="ItemListController">
+    <p>Item list</p>
+    <div class="col-md-4" ng-repeat="i in items">
+      {{ i.name }}<br>
+      {{ i.price }}<br>
+      <a href="/api/item/{{ i.id }}">View</a>
+    </div>
   </div>
 </div>
 </div>

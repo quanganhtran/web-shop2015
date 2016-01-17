@@ -68,13 +68,14 @@ module.exports.routes = {
   'GET /cart': {
     view: 'user/cart'
   },
-  'POST /purchase': {}
+  'POST /purchase': {},
 
   /*
    * Web routes here
    * Web routes always returns a view.
    */
-
+  'GET /item/:id': 'ItemController.info',
+  'GET /user/:username': 'UserController.info'
 
 }
 ;

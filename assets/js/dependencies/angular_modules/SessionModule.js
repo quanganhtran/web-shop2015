@@ -38,7 +38,7 @@ app.controller('HeaderController', function ($scope, $http) {
       });
   };
   $http.put('/login', {}).then(function (res) {
-    console.log(res);
+    //console.log(res);
     $scope.me = res.data;
   }, function (err) {
     console.log('You are not logged in.');

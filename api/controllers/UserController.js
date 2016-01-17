@@ -18,11 +18,17 @@ module.exports = {
 
 
 // render the profile view (/views/profile.ejs)
-  showProfile: function (req, res, next) {
+  showProfile: function (req, res) {
+    if (!req.session.me) {
+      return res.redirect('/');
+    }
     User.findOne(req.session.me, function foundUser(err, user) {
-      if (err) return next(err);
-      if (!user) return next();
-      res.view('user/profile', {layout: 'layouts/loggedIn', me: user});
+      if (err) return res.negotiate(err);
+      if (!user) {
+        req.session.me = null;
+        return res.notFound(err);
+      }
+      res.redirect('/user/' + user.username);
     });
   },
 
@@ -361,24 +367,21 @@ module.exports = {
 
   /**
    * UserController.info()
+   * Display a user profile
+   *
+   * @param req
+   * @param res
    */
   info: function (req, res) {
-    if (!req.params.username && !req.session.me) {
-      if (req.wantsJSON) {
-        return res.ok('You are not logged in.');
-      }
-      return res.redirect('/');
-    }
-    var target = req.params.username || req.session.me;
-    User.findOne({username: target}).exec(function (err, user) {
-      if (err) {
-        console.log(err);
-        return res.notFound();
-      }
-      if (req.wantsJSON) {
-        return res.ok(user);
-      }
-      return res.view('profile', {user: user, req: req});
+    //if (res.wantsJSON) {
+    //  return res.redirect('/api/user' + req.param('id'));
+    //}
+    User.findOne({username: req.param('username')}).exec(function (err, user) {
+      if (err) return res.negotatiate(err);
+      if (!user) return res.notFound();
+      return res.view('user/profile', {
+        user: user
+      })
     });
   }
 };

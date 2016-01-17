@@ -71,6 +71,26 @@ module.exports = {
     });
   },
 
+  /**
+   * ItemController.info()
+   * Display an item page
+   *
+   * @param req
+   * @param res
+   */
+  info: function (req, res) {
+    if (req.wantsJSON) {
+      return res.redirect('/api/item/' + req.param('id'));
+    }
+    Item.findOne(req.param('id')).exec(function (err, item) {
+      if (err) return res.negotatiate(err);
+      if (!item) return res.notFound();
+      return res.view('item/item', {
+        item: item
+      })
+    });
+  },
+
   // get the addItem view
   addItem: function (req, res) {
     User.findOne(req.session.me, function foundUser(err, user) {
