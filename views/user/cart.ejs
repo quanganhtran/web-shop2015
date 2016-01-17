@@ -1,3 +1,14 @@
+<style>
+  .simpleCart_items {
+    border-collapse: collapse !important;
+  }
+  .simpleCart_items td,
+  .simpleCart_items th {
+    background-color: #fff !important;
+    border: 2px solid black;
+    text-align: center;
+  }
+</style>
 <script type="text/javascript">
     simpleCart.email = "pghoou@hotmail.com";
     simpleCart.cartHeaders = ['Image', 'Name', 'Price', 'Options', 'Quantity_input', 'Total'];
@@ -8,7 +19,7 @@
             { attr: "name", label: "Name"},
             { view: "currency", attr: "price", label: "Price"},
             { view: "decrement", label: false},
-            { attr: "quantity", label: "Quantity"},
+            { attr: "quantity", label: "Qty"},
             { view: "increment", label: false},
             { view: "currency", attr: "total", label: "SubTotal" },
             { view: "remove", text: "Remove", label: false}
@@ -31,6 +42,14 @@
 </script>
 <div ng-app="CartModule" ng-cloak>
 <%- partial('../layouts/header') %>
-<table class="simpleCart_items"></table>
+  <table class="table">
+    <table class="simpleCart_items" style="
+          overflow-y:auto;
+          overflow-x:hidden;
+          height:324px;
+          width:243px;
+          margin-bottom:20px;">
+    </table>
+  </table>
 </div>
 <script src="js/pages/CartModule.js"></script>

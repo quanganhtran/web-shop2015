@@ -45,7 +45,6 @@
         </div>
 
         <!-- imagePath -->
-
         <div class="control-group form-group col-md-12">
           <label>Upload item image</label>
           <input type="file" class="form-control" placeholder="nunchuck.jpg" name="imagePath"
@@ -73,4 +72,14 @@
       <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
     </form>
   </div>
+  <!-- enctype="multipart/form-data" -->
+  <form id="uploadForm"
+        enctype="multipart/form-data"
+        action="/api/item/imageUpload"
+        method="post">
+    <input type="file" name="uploadFile" />
+    <input type="submit" value="submit"/>
+  </form>
 </div>
+<script src="js/pages/addItem/addItemModule.js"></script>
+<script src="js/pages/addItem/addItemController.js"></script>
