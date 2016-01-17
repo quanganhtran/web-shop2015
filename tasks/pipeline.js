@@ -38,7 +38,8 @@ var jsFilesToInject = [
 
   // Use the "exclude" operator to ignore files
   '!js/pages/**/*.js',
-  '!js/dependencies/*.min.js'
+  '!js/dependencies/*.min.js',
+  '!web'
 ];
 
 
