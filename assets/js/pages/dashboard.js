@@ -1,1 +1,1 @@
-var app = angular.module('DashboardModule',['HomepageModule']);
+var app = angular.module('DashboardModule',['SessionModule']);

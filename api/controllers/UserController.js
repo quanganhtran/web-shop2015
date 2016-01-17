@@ -104,50 +104,53 @@ module.exports = {
    * `UserController.login()`
    */
   login: function (req, res) {
-
-    // Try to look up user using the provided username
-    User.findOne({
-      username: req.param('username')
-    }, function foundUser(err, user) {
-      if (err) return res.negotiate(err);
-      if (!user) {
-        console.log('trying to log in with invalid account info');
-        return res.notFound();
-      }
-      if (user.isSuspended) {
-        console.log('trying to log in as a banned user');
-        return res.forbidden();
-      }
-
-      // Compare password attempt from the form params to the encrypted password
-      // from the database (`user.password`)
-      require('machinepack-passwords').checkPassword({
-        passwordAttempt: req.param('password'),
-        encryptedPassword: user.encryptedPassword
-      }).exec({
-
-        error: function (err) {
-          return res.negotiate(err);
-        },
-
-        // If the password from the form params doesn't checkout w/ the encrypted
-        // password from the database...
-        incorrect: function () {
+    if (req.session.me) {
+      User.findOne(req.session.me).exec(function(err, user) {
+        if (err) return res.negotiate(err);
+        if (!user) {
+          req.session.me = null;
           return res.notFound();
-        },
-
-        success: function () {
-
-          // Store user id in the user session
-          req.session.me = user.id;
-          req.session.user = user;
-          // All done- let the client know that everything worked.
-          return res.ok();
         }
+        if (user.isSuspended) {
+          console.log('trying to log in as a banned user');
+          return res.forbidden();
+        }
+        delete user.encryptedPassword;
+        return res.ok(user);
+      })
+    } else {
+      // Try to look up user using the provided username
+      User.findOne({
+        username: req.param('username')
+      }, function foundUser(err, user) {
+        if (err) return res.negotiate(err);
+        if (!user) return res.notFound();
+        // Compare password attempt from the form params to the encrypted password
+        // from the database (`user.password`)
+        require('machinepack-passwords').checkPassword({
+          passwordAttempt: req.param('password'),
+          encryptedPassword: user.encryptedPassword
+        }).exec({
+          error: function (err) {
+            return res.negotiate(err);
+          },
+          // If the password from the form params doesn't checkout w/ the encrypted
+          // password from the database...
+          incorrect: function () {
+            return res.notFound();
+          },
+          success: function () {
+            // Store user id in the user session
+            req.session.me = user.id;
+            req.session.user = user;
+            // All done- let the client know that everything worked.
+            delete user.encryptedPassword;
+            return res.ok(user);
+          }
+        });
       });
-    });
-  }
-  ,
+    }
+  },
 
   /**
    * UserController.logout()

@@ -7,7 +7,7 @@
  */
 module.exports = function(req, res, next) {
 
-  if (req.session.orPolicy) return next()
+  if (req.session.orPolicy) return next();
   else res.forbidden('You are not permitted to perform this action.');
 
 };
