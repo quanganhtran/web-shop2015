@@ -1,4 +1,5 @@
-<div class="ProductsModule">
+<div class="ProductsModule" ng-cloak>
+  <%- partial('../layouts/header2') %>
   <div class="container" ng-controller="ProductsController">
     <h3>Products</h3>
     <table class="table">
@@ -26,9 +27,11 @@
               <input type="number" min="1" class="item_Quantity" value="1">
             </td>
             <td>
+              <% if (item.isAvailable) { %>
               <button class="item_add btn btn-medium btn-primary" href="#" type="submit">
               Add to cart
               </button>
+              <% } %>
             </td>
             <td>
               <% if (!item.isAvailable) { %>
@@ -47,58 +50,58 @@
     <span class="simpleCart_quantity"></span> items - <span class="simpleCart_total"></span>
     <a href="javascript:;" class="simpleCart_checkout">Checkout</a>
     <a href="#" onclick="simpleCart.empty();return false;" class="simpleCart_empty">empty cart</a>
-
   </div>
-  <script type="text/javascript">
-    simpleCart.email = "pghoou@hotmail.com";
-    simpleCart.cartHeaders = ['Image', 'Name', 'Price', 'Options', 'Quantity_input', 'Total'];
-    simpleCart({
-      // array representing the format and columns of the cart,
-      // see the cart columns documentation
-      cartColumns: [
-        { attr: "name", label: "Name"},
-        { view: "currency", attr: "price", label: "Price"},
-        { view: "decrement", label: false},
-        { attr: "quantity", label: "Quantity"},
-        { view: "increment", label: false},
-        { view: "currency", attr: "total", label: "SubTotal" },
-        { view: "remove", text: "Remove", label: false}
-      ],
-
-      cartStyle: "table",
-
-      currency: "EUR",
-
-      checkout: {
-        type: "PayPal",
-        email: "you@yours.com"
-      }
-    });
-    function addToCart(id, name, price) {
-      console.log('id=' + id);
-      console.log('quantity' + id);
-      var qty = $('#quantity' + id).val();
-      console.log(qty);
-
-      // simpleCart.add('quantity=' + quantity, 'name=' + name, 'price=' + price);
-      return false;
-    }
-  </script>
-  <script>
-    $(function () {
-      $('.item_add').on('click', function () {
-        console.log('clicked');
-        var id = $(this).closest("tr").data("id");
-        console.log(id);
-        var quantity = $(this).closest("tr").find(".item_Quantity").val();
-        console.log(quantity);
-        var name = $(this).closest("tr").find(".item_name").html();
-        console.log(name);
-        var price = $(this).closest("tr").find(".item_price").html();
-        console.log(price);
-        console.log('quantity=' + quantity, 'name=' + name, 'price=' + price);
-        simpleCart.add({quantity: quantity,  name:name, price:price});
-      });
-    });
-  </script>
 </div>
+<script src="js/pages/product/ProductsModule.js"></script>
+<script type="text/javascript">
+  simpleCart.email = "pghoou@hotmail.com";
+  simpleCart.cartHeaders = ['Image', 'Name', 'Price', 'Options', 'Quantity_input', 'Total'];
+  simpleCart({
+    // array representing the format and columns of the cart,
+    // see the cart columns documentation
+    cartColumns: [
+      { attr: "name", label: "Name"},
+      { view: "currency", attr: "price", label: "Price"},
+      { view: "decrement", label: false},
+      { attr: "quantity", label: "Quantity"},
+      { view: "increment", label: false},
+      { view: "currency", attr: "total", label: "SubTotal" },
+      { view: "remove", text: "Remove", label: false}
+    ],
+
+    cartStyle: "table",
+
+    currency: "EUR",
+
+    checkout: {
+      type: "PayPal",
+      email: "you@yours.com"
+    }
+  });
+  function addToCart(id, name, price) {
+    console.log('id=' + id);
+    console.log('quantity' + id);
+    var qty = $('#quantity' + id).val();
+    console.log(qty);
+
+    // simpleCart.add('quantity=' + quantity, 'name=' + name, 'price=' + price);
+    return false;
+  }
+</script>
+<script>
+  $(function () {
+    $('.item_add').on('click', function () {
+      console.log('clicked');
+      var id = $(this).closest("tr").data("id");
+      console.log(id);
+      var quantity = $(this).closest("tr").find(".item_Quantity").val();
+      console.log(quantity);
+      var name = $(this).closest("tr").find(".item_name").html();
+      console.log(name);
+      var price = $(this).closest("tr").find(".item_price").html();
+      console.log(price);
+      console.log('quantity=' + quantity, 'name=' + name, 'price=' + price);
+      simpleCart.add({quantity: quantity,  name:name, price:price});
+    });
+  });
+</script>
