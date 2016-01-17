@@ -20,7 +20,8 @@ var cssFilesToInject = [
   'styles/importer.css',
   'styles/templates/*.css',
   'styles/custom.css',
-  'styles/**/*.css'
+  'styles/**/*.css',
+  '!styles/bootstrap.3.1.1.css'
 ];
 
 
