@@ -65,14 +65,17 @@ module.exports.routes = {
   'GET /addItem': 'ItemController.addItem',
   'POST /addItem': 'ItemController.submit',
   'POST /item/ban': 'ItemController.banItem',
-  'GET /cart': { view: 'user/cart' },
-  'POST /purchase': {}
+  'GET /cart': {
+    view: 'user/cart'
+  },
+  'POST /purchase': {},
 
   /*
    * Web routes here
    * Web routes always returns a view.
    */
-
+  'GET /item/:id': 'ItemController.info',
+  'GET /user/:username': 'UserController.info'
 
 }
 ;

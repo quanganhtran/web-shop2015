@@ -1,29 +1,32 @@
 <div ng-app="ProfileModule" ng-cloak>
   <%- partial('../layouts/header') %>
-  <div ng-controller="IdentityController">
-  <img src="<%= me.gravatarUrl %>" />
-  <h3>name: {{ me.name }} </h3>
+  <div ng-controller="ProfileController">
+  <img src="<%= user.gravatarUrl %>" />
+  <h3>name: {{ user.name }} </h3>
   <hr>
-  <h3>Address: {{ me.address }} </h3>
+  <h3>Address: {{ user.address }} </h3>
   <hr>
-  <h3>Phone number: {{ me.phone }} </h3>
+  <h3>Phone number: {{ user.phone }} </h3>
   <hr>
-  <h3>Last logged in at: {{ me.lastLoggedIn }} </h3>
+  <h3>Last logged in at: {{ user.lastLoggedIn }} </h3>
   <hr>
-  <h3>Role: <% if (me.role === 1) { %>
+  <h3>Role: <% if (user.role === 1) { %>
     Admin
-    <% } else if (me.role === 3) { %>
+    <% } else if (user.role === 3) { %>
     Merchant
     <% } else { %>
     Registered
-    <% if (me.isApplyingForMerchant) { %>
+    <% if (user.isApplyingForMerchant) { %>
     and applying for the merchant status
     <%}
     } %></h3>
   <hr>
-  <h3>contact: {{ me.email }} </h3>
+  <h3>contact: {{ user.email }} </h3>
 
   <a class="btn btn-medium btn-primary" href="/user/edit">Edit</a>
   </div>
 </div>
-<script src="js/pages/profile.js"></script>
+<script type="text/javascript">
+  window.SAILS_LOCALS.user = <%- JSON.stringify(user) %>;
+</script>
+<script src="/js/pages/profile.js"></script>
