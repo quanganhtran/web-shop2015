@@ -12,7 +12,7 @@ module.exports = {
     User.findOne(req.session.me, function foundUser(err, user) {
       if (err) return next(err);
       if (!user) return next();
-      res.view('user/edit', {layout: 'layouts/loggedIn', me: user});
+      res.view('user/edit', {me: user});
     });
   },
 

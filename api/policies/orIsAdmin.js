@@ -2,7 +2,7 @@
  * isMerchant
  *
  * @module      :: Policy
- * @description :: Policy to allow only an admin to create and destory items
+ * @description :: Policy to allow only an admin to create and destroy items
  * @docs        :: http://sailsjs.org/#!/documentation/concepts/Policies
  * @author      :: won
  *
