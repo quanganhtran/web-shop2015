@@ -16,6 +16,10 @@ var tmpPath = '.tmp/public/';
 // (if you're using LESS with the built-in default config, you'll want
 //  to change `assets/styles/importer.less` instead.)
 var cssFilesToInject = [
+  'styles/bootstrap.css',
+  'styles/importer.css',
+  'styles/templates/*.css',
+  'styles/custom.css',
   'styles/**/*.css'
 ];
 
@@ -38,8 +42,8 @@ var jsFilesToInject = [
 
   // Use the "exclude" operator to ignore files
   '!js/pages/**/*.js',
-  '!js/dependencies/*.min.js',
-  '!web'
+  '!js/dependencies/*.min.js'
+
 ];
 
 

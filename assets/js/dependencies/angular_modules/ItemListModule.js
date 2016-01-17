@@ -4,5 +4,8 @@
 var app = angular.module('ItemListModule', []);
 
 app.controller('ItemListController', function($scope, $http) {
-  $http.get('/api/item').then(function (res) {$scope.items = res.data;});
+  $http.get('/api/item').then(function (res) {
+    $scope.items = res.data;
+    console.log($scope.items);
+  });
 });
