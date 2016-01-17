@@ -1,19 +1,14 @@
 /**
  * Created by pghoo on 04/01/2016.
  */
-angular.module('SignupModule', ['toastr', 'compareTo']);
+var app = angular.module('SignupModule', ['toastr', 'compareTo', 'SessionModule']);
 
-angular.element(document).ready(function() {
-  var SignupModule = document.getElementById("SignupModule");
-  angular.bootstrap(SignupModule, ["SignupModule"]);
-});
-
-angular.module('SignupModule').controller('SignupController', ['$scope', '$http', 'toastr', function($scope, $http, toastr){
+app.controller('SignupController', ['$scope', '$http', 'toastr', function($scope, $http, toastr){
 
   // set-up loading state
   $scope.signupForm = {
     loading: false
-  }
+  };
 
   $scope.submitSignupForm = function() {
     $scope.signupForm.loading = true;
@@ -34,8 +29,8 @@ angular.module('SignupModule').controller('SignupController', ['$scope', '$http'
         console.log('signup module catch');
         console.log('signup module says ', sailsResponse.status);
         console.log(sailsResponse.status);
-        var emailAddressAlreadyInUse = sailsResponse.status == 409;
 
+        var emailAddressAlreadyInUse = sailsResponse.status == 409;
         if (emailAddressAlreadyInUse) {
           toastr.error('That email address has already been taken, please try again.', 'Error', {
             closeButton: true
@@ -44,7 +39,6 @@ angular.module('SignupModule').controller('SignupController', ['$scope', '$http'
         }
 
         var usernameAlreadyInUse = sailsResponse.status == 418;
-
         if (usernameAlreadyInUse) {
           toastr.error('That username has already been taken, please try again.', 'Error', {
             closeButton: true
@@ -53,12 +47,10 @@ angular.module('SignupModule').controller('SignupController', ['$scope', '$http'
         }
 
         var notValidEmail = sailsResponse.status == 419;
-
         if (notValidEmail) {
           toastr.error('The email address is not valid, please try again.', 'Error', {
             closeButton: true
           });
-          return;
         }
       })
       .finally(function eitherWay(){

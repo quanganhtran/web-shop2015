@@ -43,9 +43,6 @@ app.controller('HeaderController', function ($scope, $http) {
   }, function (err) {
     console.log('You are not logged in.');
   });
-  //SessionService.me(function(me){
-  //  $scope.me = me;
-  //});
 });
 
 app.controller('IdentityController', ['$scope', 'SessionService', function($scope, SessionService) {
