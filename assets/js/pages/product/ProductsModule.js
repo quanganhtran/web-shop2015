@@ -1,4 +1,4 @@
-angular.module('ProductsModule', ['IdentityModule']);
+angular.module('ProductsModule', ['SessionModule']);
 
 angular.element(document).ready(function() {
   var Module = document.getElementsByClassName("ProductsModule");
