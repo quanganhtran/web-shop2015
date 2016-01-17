@@ -18,6 +18,7 @@ module.exports = {
    */
   submit: function (req, res) {
     if (!req.session.me) return res.forbidden();
+
     Item.create({
       name: req.param('name'),
       price: req.param('price'),
@@ -27,7 +28,27 @@ module.exports = {
       manufacturedDate: req.param('manufacturedDate')
     }).exec(function (err, item) {
       if (err) return res.negotiate(err);
+     // req.file.uploadFile = item.imagePath;
       return res.ok(item);
+    });
+  },
+
+  imageUpload: function (req, res) {
+    if(req.method === 'GET')
+      return res.json({'status':'GET not allowed'});
+    //	Call to /upload via GET is error
+
+    var uploadFile = req.file('uploadFile');
+    console.log(uploadFile);
+
+    uploadFile.upload({ dirname: '../../assets/images'}, function onUploadComplete (err, files) {
+      //	Files will be uploaded to .tmp/uploads
+
+      if (err) return res.serverError(err);
+      //	IF ERROR Return and send 500 error with error
+
+      console.log(files);
+      res.json({status:200, file:files});
     });
   },
 
@@ -124,24 +145,5 @@ module.exports = {
       });
     // also ban the items from the suspended user
     return res.ok;
-  },
-
-  imageUpload: function (req, res) {
-    if(req.method === 'GET')
-      return res.json({'status':'GET not allowed'});
-    //	Call to /upload via GET is error
-
-    var uploadFile = req.file('uploadFile');
-    console.log(uploadFile);
-
-    uploadFile.upload(function onUploadComplete (err, files) {
-      //	Files will be uploaded to .tmp/uploads
-
-      if (err) return res.serverError(err);
-      //	IF ERROR Return and send 500 error with error
-
-      console.log(files);
-      res.json({status:200,file:files});
-    });
   }
 }
