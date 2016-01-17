@@ -13,7 +13,6 @@
       <th></th>
       <th>Accept</th>
     </tr>
-
     <tr ng-repeat="u in users">
       <td>{{ u.username }}</td>
       <td>{{ u.email }}</td>
@@ -52,7 +51,7 @@
         window.location = '/showUsers';
       });
     });
-    $('.suspend').on('click', function () {
+    $('.table').on('click', '.suspend', function () {
       var id = $(this).data("id");
       console.log(id);
       $.get('/user/suspend/' + id, function (data, status) {

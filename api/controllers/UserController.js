@@ -110,7 +110,14 @@ module.exports = {
       username: req.param('username')
     }, function foundUser(err, user) {
       if (err) return res.negotiate(err);
-      if (!user) return res.notFound();
+      if (!user) {
+        console.log('trying to log in with invalid account info');
+        return res.notFound();
+      }
+      if (user.isSuspended) {
+        console.log('trying to log in as a banned user');
+        return res.forbidden();
+      }
 
       // Compare password attempt from the form params to the encrypted password
       // from the database (`user.password`)
@@ -289,20 +296,20 @@ module.exports = {
    * @param  {Function} res
    */
   setMerchant: function (req, res) {
-    User.findOne(req.param('id')).exec(function (err, user){
+    User.findOne(req.param('id')).exec(function (err, user) {
       if (err) return res.negotiate(err);
       if (!user) return res.notFound('User not found.');
       if (user.role == 1) return res.forbidden('The action requested cannot be performed on this user.');
       var newRole = user.role == 3 ? 2 : 3;
-      console.log('user'+user.role);
-      console.log('newrole'+newRole);
+      console.log('user' + user.role);
+      console.log('newrole' + newRole);
       User.update(req.param('id'), {
         role: newRole,
         isApplyingForMerchant: false
-      }).exec(function (err, user){
+      }).exec(function (err, user) {
         if (err) return res.negotiate(err);
         var msg = user.role == 3 ? 'Merchant privilege has been granted for this user.' : 'Merchant privilege has been revoked from this user.';
-        console.log('newly set role'+user.role);
+        console.log('newly set role' + user.role);
         return res.ok(msg);
       });
     });
@@ -332,12 +339,12 @@ module.exports = {
       if (user.role == 1) return res.forbidden('The action requested cannot be performed on this user.');
       else {
         var isSuspended;
-        if (user.isSuspended === false ) {
+        if (user.isSuspended === false) {
           isSuspended = true;
         } else {
           isSuspended = false;
         }
-        User.update({id: req.param('id')}, {isSuspended:isSuspended}).exec(function afterwards(err, updated){
+        User.update({id: req.param('id')}, {isSuspended: isSuspended}).exec(function afterwards(err, updated) {
           if (err) return res.negotiate(err);
           // If session refers to a user who no longer exists, still allow logout.
           if (!user) {
@@ -348,7 +355,7 @@ module.exports = {
         });
 
         // also ban the items from the suspended user
-        res.json({createdBy:req.param('id'), isSuspended:isSuspended});
+        res.json({createdBy: req.param('id'), isSuspended: isSuspended});
       }
     });
   },

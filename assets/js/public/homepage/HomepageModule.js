@@ -26,6 +26,15 @@ app.controller('HomepageController', ['$scope', '$http', 'toastr', function($sco
       .catch(function onError(sailsResponse) {
 
         // Handle known error type(s).
+        // suspended user tries to login.
+        console.log(sailsResponse.status);
+        if (sailsResponse.status == 403) {
+          toastr.error('Your account is suspended. Contact the admin for more info.', 'Error', {
+            closeButton: true
+          });
+          return;
+        } else
+
         // Invalid username / password combination.
         if (sailsResponse.status === 400 || 404) {
           // $scope.loginForm.topLevelErrorMessage = 'Invalid email/password combination.';
