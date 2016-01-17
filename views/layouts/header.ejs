@@ -24,7 +24,7 @@
           <input ng-model="loginForm.password" type="password" placeholder="Password" name="password"
                  class="form-control">
         </div>
-        <button type="submit" class="btn btn-success">
+        <button type="submit" class="btn btn-success" onclick="simpleCart.empty();">
           <span ng-show="!loginForm.loading">Sign in</span>
           <span ng-show="loginForm.loading" class="fa fa-spinner"></span>
           <span ng-show="loginForm.loading">Signing in...</span>

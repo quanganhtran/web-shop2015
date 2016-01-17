@@ -1,14 +1,3 @@
-<style>
-  .simpleCart_items {
-    border-collapse: collapse !important;
-  }
-  .simpleCart_items td,
-  .simpleCart_items th {
-    background-color: #fff !important;
-    border: 2px solid black;
-    text-align: center;
-  }
-</style>
 <script type="text/javascript">
     simpleCart.email = "pghoou@hotmail.com";
     simpleCart.cartHeaders = ['Image', 'Name', 'Price', 'Options', 'Quantity_input', 'Total'];
@@ -18,9 +7,9 @@
         cartColumns: [
             { attr: "name", label: "Name"},
             { view: "currency", attr: "price", label: "Price"},
-            { view: "decrement", label: false},
+            { view: "decrement", label: ''},
             { attr: "quantity", label: "Qty"},
-            { view: "increment", label: false},
+            { view: "increment", label: ''},
             { view: "currency", attr: "total", label: "SubTotal" },
             { view: "remove", text: "Remove", label: false}
         ],
@@ -35,21 +24,19 @@
         }
     });
 </script>
-<script>
-  $(document).ready(function(){
-    $('.simpleCart_items').addClass('table');
-  });
-</script>
 <div ng-app="CartModule" ng-cloak>
 <%- partial('../layouts/header') %>
-  <table class="table">
-    <table class="simpleCart_items" style="
-          overflow-y:auto;
-          overflow-x:hidden;
-          height:324px;
-          width:243px;
-          margin-bottom:20px;">
-    </table>
-  </table>
+  <div style="text-align: center;display: block;margin: auto;width: 30%;">
+    <table class="simpleCart_items" ng-class="textType"></table>
+  </div>
+  <input type="hidden" ng-model="textType" value="table success">
 </div>
+<script type="text/javascript">
+  simpleCart.bind("afterCreate", function(){
+    $cart_table = $(".simpleCart_items table");
+    $cart_table.addClass("table").addClass("table-hover");
+    $cart_table.find('.simpleCart_decrement').addClass("fa fa-minus-circle").html('');
+    $cart_table.find('.simpleCart_increment').addClass("fa fa-plus-circle").html('');
+  });
+</script>
 <script src="js/pages/CartModule.js"></script>

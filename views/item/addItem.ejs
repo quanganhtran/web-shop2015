@@ -1,4 +1,5 @@
 <div class="AddItemModule">
+  <%- partial('../layouts/header') %>
   <div ng-controller="AddItemController">
     <!-- ADD ITEM FORM -->
     <form ng-submit="submitAddItemForm()" id="add-item-form"
@@ -13,7 +14,8 @@
              ng-class="{'has-error':addItem.name.$invalid &&
                                 addItem.name.$dirty}">
           <label>Item name</label>
-          <input type="text" class="form-control" placeholder="e.g. Nunchucks" name="name" ng-model="addItemForm.name"
+          <input type="text" class="form-control add" placeholder="e.g. Nunchucks" name="name"
+                 ng-model="addItemForm.name"
                  ng-maxlength="50" required>
           <span class="help-block has-error" ng-if="signup.name.$dirty">
             <span ng-show="addItem.name.$error.required">Name is required.</span>
@@ -27,7 +29,7 @@
              ng-class="{'has-error':addItem.price.$invalid &&
                               addItem.price.$dirty}">
           <label>Price in Euro(€)</label>
-          <input type="number" min="0" step="any" class="form-control" placeholder="19.9" name="price"
+          <input type="number" min="0" step="any" class="form-control add" placeholder="19.9" name="price"
                  ng-model="addItemForm.price" required>
           <span class="help-block has-error" ng-if="addItem.email.$dirty">
             <span ng-show="addItem.email.$error.required">price is required.</span>
@@ -41,20 +43,29 @@
                               addItem.description.$dirty}">
           <label>Item description</label>
           <!-- Added the compareTo directive that compares the passowrds -->
-          <input type="text" class="form-control" placeholder="description about your product" name="description"
+          <input type="text" class="form-control add" placeholder="description about your product" name="description"
                  ng-model="addItemForm.description" ng-maxlength="100">
         </div>
 
-        <!-- imagePath -->
+        <!-- image -->
         <div class="control-group form-group col-md-12">
           <label>Upload item image</label>
-          <input type="file" class="form-control" placeholder="nunchuck.jpg" name="imagePath"
-                 ng-model="addItemForm.imagePath" >
+          <div style="text-align: center" >
+            <file-field class="btn add" ng-model="addItemForm.uploadFile" ng-class="{'btn-success':previewImage}"
+                        preview="previewImage">
+              Select File
+            </file-field>
+          </div>
+        </div>
+
+        <div class="col-sm-4" ng-show="previewImage">
+          <h3>Preview</h3>
+          <img ng-src="{{previewImage}}" width="200">
         </div>
 
         <!--manufactured date -->
 
-        <div class="control-group form-group col-md-12">
+        <div class="control-group form-group col-md-12 add">
           <label>Manufactured date</label>
           <input type="date" class="form-control" placeholder="dd/mm/yyyy" name="manufacturedDate"
                  ng-model="addItemForm.manufacturedDate">
@@ -75,4 +86,3 @@
   </div>
 </div>
 <script src="js/pages/addItem/addItemModule.js"></script>
-<script src="js/pages/addItem/addItemController.js"></script>

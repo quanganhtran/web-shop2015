@@ -18,38 +18,50 @@ module.exports = {
    */
   submit: function (req, res) {
     if (!req.session.me) return res.forbidden();
+    console.log(req.allParams());
+    console.log('body'+req.body);
+    var fs = require('fs');
+    console.log(req.param('name'));
+    console.log('we re here');
+    console.log(req.file('uploadFile'));
+    req.file('uploadFile').upload({
+      // don't allow the total upload size to exceed ~10MB
+      maxBytes: 10000000,
+      dirname: '../../assets/images'
+    }, function whenDone(err, uploadedFiles) {
+      console.log('uploadedFiles');
+      console.log(uploadedFiles);
 
-    Item.create({
-      name: req.param('name'),
-      price: req.param('price'),
-      createdBy: req.session.me,
-      description: req.param('description'),
-      imagePath: req.param('imagePath'),
-      manufacturedDate: req.param('manufacturedDate')
-    }).exec(function (err, item) {
-      if (err) return res.negotiate(err);
-     // req.file.uploadFile = item.imagePath;
-      return res.ok(item);
-    });
-  },
+      if (err) {
+        return res.negotiate(err);
+      }
 
-  imageUpload: function (req, res) {
-    if(req.method === 'GET')
-      return res.json({'status':'GET not allowed'});
-    //	Call to /upload via GET is error
+      console.log(sails.getBaseUrl());
+      var intermediateStr = uploadedFiles[0].fd.split("images\\")[1];
+      var imgPath = sails.getBaseUrl()+ '/images/'+intermediateStr;
+      // if no files were uploaded, respond with an error.
+      console.log(imgPath);
+      if (uploadedFiles.length === 0){
+        return res.badRequest('No file was uploaded');
+      }
+      console.log('we re here3');
+      // save the "fd" and the url where the image for an item can be accessed
+      Item.create({
+        name: req.param('name'),
+        price: req.param('price'),
+        createdBy: req.session.me,
+        description: req.param('description'),
+        imagePath: imgPath,
+        manufacturedDate: req.param('manufacturedDate')
+      }).exec(function (err, item) {
+        if (err) return res.negotiate(err);
+        // req.file.uploadFile = item.imagePath;
+        return res.ok(item);
+      });
+      console.log('we re here4');
+    })
 
-    var uploadFile = req.file('uploadFile');
-    console.log(uploadFile);
 
-    uploadFile.upload({ dirname: '../../assets/images'}, function onUploadComplete (err, files) {
-      //	Files will be uploaded to .tmp/uploads
-
-      if (err) return res.serverError(err);
-      //	IF ERROR Return and send 500 error with error
-
-      console.log(files);
-      res.json({status:200, file:files});
-    });
   },
 
   /**
