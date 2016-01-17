@@ -39,7 +39,7 @@
 <script src="js/pages/userList.js"></script>
 <script>
   $(document).ready(function(){
-    $('.setMerchant').click(function () {
+    $('.table').on('click', '.setMerchant', function () {
       var id = $(this).data("id");
       console.log(id);
       $.get('/user/setMerchant/' + id, function (data, status) {
