@@ -1,11 +1,56 @@
-<div ng-app="ItemModule">
+<div id="all" ng-app="ItemModule">
 <%- partial('../layouts/header') %>
-  <div class="col-md-8 col-md-offset-2" ng-controller="ItemController">
-    <h2 class="col-md-4">{{ item.name }}</h2>
-    <div class="col-md-4">{{ item.price }}</div>
-    <div class="col-md-4">{{ item.description }}</div>
-    <div class="col-md-4"><button class="btn btn-primary">ADD TO CART</button></div>
+
+  <!--<div class="col-md-8 col-md-offset-2" ng-controller="ItemController">-->
+    <!--<h2 class="col-md-4">{{ item.name }}</h2>-->
+    <!--<div class="col-md-4">{{ item.price }}</div>-->
+    <!--<div class="col-md-4">{{ item.description }}</div>-->
+    <!--<div class="col-md-4"><button class="btn btn-primary">ADD TO CART</button></div>-->
+  <!--</div>-->
+
+  <div id="content">
+  <div class="container" ng-controller="ItemController">
+
+    <div class="row" id="productMain">
+      <div class="col-md-6">
+        <div id="mainImage">
+          <img src="/web/img/detailbig1.jpg" alt="" class="img-responsive center-block">
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="box">
+          <h1 class="text-center">{{ item.name }}</h1>
+          <p class="goToDescription"><a href="#details" class="scroll-to">Scroll to product details, material & care and sizing</a>
+          </p>
+          <p class="price">${{ item.price }}</p>
+
+          <p class="text-center buttons">
+            <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+            <a href="basket.html" class="btn btn-default"><i class="fa fa-heart"></i> Add to wishlist</a>
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="box" id="details">
+      <p>
+      <h4>Product details</h4>
+      <p>{{ item.description }}</p>
+
+      <blockquote>
+        <p><em>Define style this season with Armani's new range of trendy tops, crafted with intricate details. Create a chic statement look by teaming this lace number with skinny jeans and pumps.</em>
+        </p>
+      </blockquote>
+    </div>
+
   </div>
+  </div>
+
+
+
+
 </div>
 <script type="text/javascript">
   window.SAILS_LOCALS.item = <%- JSON.stringify(item) %>;

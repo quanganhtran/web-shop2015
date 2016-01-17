@@ -126,4 +126,4 @@ module.exports = {
     // also ban the items from the suspended user
     return res.ok;
   }
-}
+};
