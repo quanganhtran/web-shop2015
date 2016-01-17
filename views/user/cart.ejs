@@ -24,8 +24,13 @@
         }
     });
 </script>
-<script src="js/dependencies/angular_modules/identity.js"></script>
-<div ng-app="IdentityModule" ng-cloak>
-<%- partial('../layouts/header2') %>
+<script>
+  $(document).ready(function(){
+    $('.simpleCart_items').addClass('table');
+  });
+</script>
+<div ng-app="CartModule" ng-cloak>
+<%- partial('../layouts/header') %>
 <table class="simpleCart_items"></table>
 </div>
+<script src="js/pages/CartModule.js"></script>

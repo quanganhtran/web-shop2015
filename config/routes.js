@@ -50,7 +50,7 @@ module.exports.routes = {
    * Custom API routes always return JSON. Default blueprints are also available.
    */
   // User routes
-  'GET /signup': {view: 'signup'},
+  'GET /signup': { view: 'signup' },
   'POST /signup': 'UserController.signup',
   'PUT /login': 'UserController.login',
   'GET /profile': 'UserController.showProfile',
@@ -65,9 +65,7 @@ module.exports.routes = {
   'GET /addItem': 'ItemController.addItem',
   'POST /addItem': 'ItemController.submit',
   'POST /item/ban': 'ItemController.banItem',
-  'GET /cart': {
-    view: 'user/cart'
-  },
+  'GET /cart': { view: 'user/cart' },
   'POST /purchase': {}
 
   /*

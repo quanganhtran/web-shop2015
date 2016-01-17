@@ -1,4 +1,5 @@
-<div class="EditModule">
+<div ng-app="EditModule" ng-cloak>
+  <%- partial('../layouts/header') %>
   <div ng-controller="EditController" ng-cloak>
     <!-- edit FORM -->
     <form ng-submit="submitEditForm()" id="edit-form" class="form-edit" name="edit">
@@ -117,3 +118,4 @@
     </form>
   </div>
 </div>
+<script src="/js/pages/edit/EditModule.js"></script>

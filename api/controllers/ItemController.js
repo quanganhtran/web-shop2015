@@ -63,7 +63,6 @@ module.exports = {
       Item.find().populate('createdBy').exec(function foundItem(err, items) {
         if (err) return res.negotiate(err);
         return res.view('item/products', {
-          layout: 'layouts/loggedIn',
           items: items,
           me: user
         });

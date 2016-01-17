@@ -12,7 +12,7 @@ module.exports = {
     User.findOne(req.session.me, function foundUser(err, user) {
       if (err) return next(err);
       if (!user) return next();
-      res.view('user/edit', {layout: 'layouts/loggedIn', me: user});
+      res.view('user/edit', {me: user});
     });
   },
 
@@ -22,7 +22,7 @@ module.exports = {
     User.findOne(req.session.me, function foundUser(err, user) {
       if (err) return next(err);
       if (!user) return next();
-      res.view('user/profile', {layout: 'layouts/loggedIn', me: user});
+      res.view('user/profile', {me: user});
     });
   },
 
@@ -111,6 +111,7 @@ module.exports = {
           req.session.me = null;
           return res.notFound();
         }
+        // block suspended user
         if (user.isSuspended) {
           console.log('trying to log in as a banned user');
           return res.forbidden();
@@ -125,6 +126,10 @@ module.exports = {
       }, function foundUser(err, user) {
         if (err) return res.negotiate(err);
         if (!user) return res.notFound();
+        if (user.isSuspended) {
+          console.log('trying to log in as a banned user');
+          return res.forbidden();
+        }
         // Compare password attempt from the form params to the encrypted password
         // from the database (`user.password`)
         require('machinepack-passwords').checkPassword({
@@ -328,7 +333,7 @@ module.exports = {
           if (err) return next(err);
           if (!user) return next();
           res.view(
-            'user/users', {layout: 'layouts/loggedIn', me: user, users: users}
+            'user/users', {me: user, users: users}
           );
         });
       }

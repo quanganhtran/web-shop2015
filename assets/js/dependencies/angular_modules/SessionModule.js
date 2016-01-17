@@ -1,9 +1,9 @@
 /**
  * Created by Anh on 12/9/2015.
  */
-var app = angular.module('SessionModule', ['ngCookies']);
+var app = angular.module('SessionModule', ['ngCookies', 'toastr']);
 
-app.controller('HeaderController', function ($scope, $http) {
+app.controller('HeaderController', ['$scope', '$http', 'toastr', function ($scope, $http, toastr) {
   // set-up loginForm loading state
   $scope.loginForm = {
     loading: false
@@ -23,6 +23,13 @@ app.controller('HeaderController', function ($scope, $http) {
       .catch(function onError(sailsResponse) {
         // Handle known error type(s).
         // Invalid username / password combination.
+        if (sailsResponse.status === 403) {
+          toastr.error('You are suspended, contact admin for more info.', 'Error', {
+            closeButton: true
+          });
+          return;
+        }
+
         if (sailsResponse.status === 400 || 404) {
           toastr.error('Invalid username/password combination.', 'Error', {
             closeButton: true
@@ -43,7 +50,7 @@ app.controller('HeaderController', function ($scope, $http) {
   }, function (err) {
     console.log('You are not logged in.');
   });
-});
+}]);
 
 app.controller('IdentityController', ['$scope', 'SessionService', function($scope, SessionService) {
   //$scope.me = window.SAILS_LOCALS.me;
