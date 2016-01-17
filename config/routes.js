@@ -66,10 +66,7 @@ module.exports.routes = {
   'POST /addItem': 'ItemController.submit',
   'POST /item/ban': 'ItemController.banItem',
   'GET /cart': {
-    view: 'user/cart', locals: {
-      layout: 'layouts/loggedin'
-    },
-    me: <here should be the req.session.user>
+    view: 'user/cart'
   },
   'POST /purchase': {}
 
