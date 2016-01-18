@@ -38,7 +38,7 @@ module.exports.policies = {
     '*': true,
     create: false,
     update: false,
-    submit: 'isMerchant',
+    submit: ['orIsMerchant', 'orIsAdmin', 'orPolicy'],
     modify: 'isOwner',
     destroy: ['orIsOwner', 'orIsAdmin', 'orPolicy']
   }

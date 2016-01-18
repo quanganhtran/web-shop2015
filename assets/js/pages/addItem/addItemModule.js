@@ -19,31 +19,48 @@ angular.module('AddItemModule').controller('AddItemController', ['$scope', '$htt
     $scope.submitAddItemForm = function () {
       $scope.addItemForm.loading = true;
 
-      console.log('uploadFile', $scope.addItemForm.uploadFile);
+      if ($scope.addItemForm.uploadFile) {
+        console.log('There is a file');
+        var fd = new FormData();
+        fd.append('name', $scope.addItemForm.name);
+        fd.append('price', $scope.addItemForm.price);
+        fd.append('description', $scope.addItemForm.description);
+        fd.append('manufacturedDate', $scope.addItemForm.manufacturedDate);
+        fd.append('uploadFile', $scope.addItemForm.uploadFile);
 
-      console.log($scope.addItemForm.name);
-      console.log($scope.addItemForm.price);
+        console.log(fd);
 
-      var fd = new FormData();
-
-      fd.append('name', $scope.addItemForm.name);
-      fd.append('price', $scope.addItemForm.price);
-      fd.append('description', $scope.addItemForm.description);
-      fd.append('uploadFile', $scope.addItemForm.uploadFile);
-      fd.append('manufacturedDate', $scope.addItemForm.manufacturedDate);
-
-        //      name: $scope.addItemForm.name,
-        //  price: $scope.addItemForm.price,
-        //// createdBy: req.session.me,
-        //description: $scope.addItemForm.description,
-        //uploadFile: $scope.addItemForm.uploadFile,
-        //manufacturedDate: $scope.addItemForm.manufacturedDate
-
-      $http.post('/addItem', fd, {
-          transformRequest: angular.identity,
-          headers: {'Content-Type': undefined}
-        })
-        .then(function onSuccess(sailsResponse) {
+        $http.post('/addItem', fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+          })
+          .then(function onSuccess(sailsResponse) {
+              $('.add').val('');
+              $scope.previewImage = "";
+              toastr.success('The item is added successfully.', 'Success', {
+                closeButton: true
+              });
+              return;
+            },
+            function onError(sailsResponse) {
+              $('.add').val('');
+              $scope.previewImage = "";
+              toastr.error('The item failed in submission.', 'Error', {
+                closeButton: true
+              });
+            }
+          )
+          .finally(function eitherWay() {
+            $scope.addItemForm.loading = false;
+          })
+      } else {
+        console.log('There is NNNNNOOOOOO file');
+        $http.post('/addItem', {
+          name: $scope.addItemForm.name,
+          price: $scope.addItemForm.price,
+          description: $scope.addItemForm.description,
+          manufacturedDate: $scope.addItemForm.manufacturedDate
+        }).then(function onSuccess(sailsResponse) {
             $('.add').val('');
             $scope.previewImage = "";
             toastr.success('The item is added successfully.', 'Success', {
@@ -58,9 +75,12 @@ angular.module('AddItemModule').controller('AddItemController', ['$scope', '$htt
               closeButton: true
             });
           }
-        )
-        .finally(function eitherWay() {
-          $scope.addItemForm.loading = false;
-        })
+          )
+          .finally(function eitherWay() {
+            $scope.addItemForm.loading = false;
+          })
+      }
+
+
     };
   }]);

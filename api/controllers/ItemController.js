@@ -18,50 +18,48 @@ module.exports = {
    */
   submit: function (req, res) {
     if (!req.session.me) return res.forbidden();
-    console.log(req.allParams());
-    console.log('body'+req.body);
-    var fs = require('fs');
-    console.log(req.param('name'));
-    console.log('we re here');
-    console.log(req.file('uploadFile'));
     req.file('uploadFile').upload({
       // don't allow the total upload size to exceed ~10MB
-      maxBytes: 10000000,
+      maxBytes: 100000,
       dirname: '../../assets/images'
     }, function whenDone(err, uploadedFiles) {
-      console.log('uploadedFiles');
       console.log(uploadedFiles);
 
       if (err) {
         return res.negotiate(err);
       }
 
-      console.log(sails.getBaseUrl());
-      var intermediateStr = uploadedFiles[0].fd.split("images\\")[1];
-      var imgPath = sails.getBaseUrl()+ '/images/'+intermediateStr;
-      // if no files were uploaded, respond with an error.
-      console.log(imgPath);
-      if (uploadedFiles.length === 0){
-        return res.badRequest('No file was uploaded');
+      if (uploadedFiles.length === 0) {
+        Item.create({
+          name: req.param('name'),
+          price: req.param('price'),
+          createdBy: req.session.me,
+          description: req.param('description'),
+          imagePath: null,
+          manufacturedDate: req.param('manufacturedDate')
+        }).exec(function (err, item) {
+          console.log('WANNABE WATANABE');
+          return res.ok('No file was uploaded');
+        });
+      } else {
+        console.log(sails.getBaseUrl());
+        var intermediateStr = uploadedFiles[0].fd.split("images\\")[1];
+        var imgPath = sails.getBaseUrl() + '/images/' + intermediateStr;
+        // if no files were uploaded, respond with an error.
+        // save the "fd" and the url where the image for an item can be accessed
+        Item.create({
+          name: req.param('name'),
+          price: req.param('price'),
+          createdBy: req.session.me,
+          description: req.param('description'),
+          imagePath: imgPath,
+          manufacturedDate: req.param('manufacturedDate')
+        }).exec(function (err, item) {
+          if (err) return res.negotiate(err);
+          return res.ok(item);
+        });
       }
-      console.log('we re here3');
-      // save the "fd" and the url where the image for an item can be accessed
-      Item.create({
-        name: req.param('name'),
-        price: req.param('price'),
-        createdBy: req.session.me,
-        description: req.param('description'),
-        imagePath: imgPath,
-        manufacturedDate: req.param('manufacturedDate')
-      }).exec(function (err, item) {
-        if (err) return res.negotiate(err);
-        // req.file.uploadFile = item.imagePath;
-        return res.ok(item);
-      });
-      console.log('we re here4');
     })
-
-
   },
 
   /**
@@ -80,7 +78,8 @@ module.exports = {
       if (err) return res.negotiate(err);
       return res.ok(item);
     });
-  },
+  }
+  ,
 
   /**
    * ItemController.showProducts()
@@ -91,8 +90,8 @@ module.exports = {
    */
   showProducts: function (req, res) {
     User.findOne(req.session.me, function foundUser(err, user) {
-      if (err) return next(err);
-      if (!user) return next();
+      if (err) return res.negotiate(err);
+      if (!user) return res.notFound();
       Item.find().populate('createdBy').exec(function foundItem(err, items) {
         if (err) return res.negotiate(err);
         return res.view('item/products', {
@@ -101,7 +100,8 @@ module.exports = {
         });
       })
     });
-  },
+  }
+  ,
 
   /**
    * ItemController.info()
@@ -121,13 +121,14 @@ module.exports = {
         item: item
       })
     });
-  },
+  }
+  ,
 
-  // get the addItem view
+// get the addItem view
   addItem: function (req, res) {
     User.findOne(req.session.me, function foundUser(err, user) {
-      if (err) return next(err);
-      if (!user) return next();
+      if (err) return res.negotiate(err);
+      if (!user) return res.notFound();
       Item.find({}).exec(function foundItem(err, items) {
         if (err) return res.negotiate(err);
         return res.view('item/addItem', {
@@ -136,7 +137,8 @@ module.exports = {
         });
       })
     });
-  },
+  }
+  ,
 
   /**
    * `ItemController.banItem()`
@@ -158,4 +160,5 @@ module.exports = {
     // also ban the items from the suspended user
     return res.ok;
   }
-};
+}
+;

@@ -1,4 +1,4 @@
-<div class="container-fluid" ng-controller="HeaderController">
+<div class="container-fluid" ng-controller="HeaderController" ng-cloak="">
   <!-- Creates the navbar for non-user -->
   <nav class="navbar navbar-inverse" ng-show="!me">
     <!-- This creates the mechanism for collapse button -->
@@ -72,8 +72,8 @@
         <li ng-if="me.role === 1">
           <a href="/showUsers">Manage users</a>
         </li>
-        <!-- Merchant interface -->
-        <li ng-if="me.role === 3">
+        <!-- Merchant or Admin interface -->
+        <li ng-if="me.role === 3 || me.role === 1">
           <a href="/addItem">Add items</a>
         </li>
         <li>
