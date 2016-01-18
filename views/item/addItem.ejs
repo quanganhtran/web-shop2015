@@ -67,7 +67,7 @@
 
         <div class="control-group form-group col-md-12 add">
           <label>Manufactured date</label>
-          <input type="date" class="form-control" placeholder="dd/mm/yyyy" name="manufacturedDate"
+          <input id="manufactureDate" type="date" class="form-control" placeholder="dd/mm/yyyy" name="manufacturedDate"
                  ng-model="addItemForm.manufacturedDate">
         </div>
       </div>
@@ -86,3 +86,15 @@
   </div>
 </div>
 <script src="js/pages/addItem/addItemModule.js"></script>
+<script>
+  // set default date of the manufactured date to today
+  $(document).ready()
+  {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+    if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} today = mm+'/'+dd+'/'+yyyy;
+    $('#manufactureDate').attr('value', today);
+  };
+</script>
