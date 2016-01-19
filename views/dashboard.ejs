@@ -1,20 +1,24 @@
 <div ng-app="DashboardModule" ng-cloak>
   <%- partial('layouts/header') %>
-  <div ng-controller="IdentityController">
-  <h1> Logged in as '{{ me.username }}' </h1>
-  <hr>
-  <% if (me.role === 1) { %>
-  <h3>Welcome, admin!</h3>
-  <% } else if (me.role === 3) { %>
-  <h3>Welcome, merchant!</h3>
-  <% } else { %>
-  <h3>Welcome!</h3>
-  <% } %>
-
-  <h3>Selling: {{ me.sells }} </h3>
-  <hr>
-  <h3>Ordered: {{ me.purchases }} </h3>
-  <hr>
+  <div id="content">
+    <div class="container">
+      <div class="box" ng-controller="IdentityController">
+        <h1> Logged in as '{{ me.username }}' </h1>
+        <hr>
+        <% if (me.role === 1) { %>
+        <h3>Welcome, admin!</h3>
+        <% } else if (me.role === 3) { %>
+        <h3>Welcome, merchant!</h3>
+        <% } else { %>
+        <h3>Welcome!</h3>
+        <% } %>
+        <h3>Selling: {{ me.sells }} </h3>
+        <hr>
+        <h3>Ordered: {{ me.purchases }} </h3>
+        <hr>
+      </div>
+    </div>
   </div>
+
 </div>
 <script src="/js/pages/dashboard.js"></script>

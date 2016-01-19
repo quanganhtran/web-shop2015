@@ -40,6 +40,27 @@ module.exports = {
         });
       }
     });
+  },
+
+  /**
+   * OrderController.info()
+   * Display an order
+   *
+   * @param  {Object}   req                     Request object
+   * @param  {int}      req.params("id")        Order ID
+   * @param  {Object}   res                     Response object
+   */
+  info: function (req, res) {
+    if (res.wantsJSON) {
+      return res.redirect('/api/order/' + req.param('id'));
+    }
+    Order.findOne(req.param('id')).populate('orderDetails').exec(function (err, order) {
+      if (err) return res.negotatiate(err);
+      if (!order) return res.notFound();
+      return res.view('item/order', {
+        order: order
+      })
+    });
   }
 };
 

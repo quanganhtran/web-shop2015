@@ -390,7 +390,8 @@ module.exports = {
       if (err) return res.negotatiate(err);
       if (!user) return res.notFound();
       return res.view('user/profile', {
-        user: user
+        user: user,
+        me: req.session.me
       })
     });
   }

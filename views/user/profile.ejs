@@ -1,29 +1,34 @@
 <div ng-app="ProfileModule" ng-cloak>
   <%- partial('../layouts/header') %>
-  <div ng-controller="ProfileController">
-  <img src="<%= user.gravatarUrl %>" />
-  <h3>name: {{ user.name }} </h3>
-  <hr>
-  <h3>Address: {{ user.address }} </h3>
-  <hr>
-  <h3>Phone number: {{ user.phone }} </h3>
-  <hr>
-  <h3>Last logged in at: {{ user.lastLoggedIn }} </h3>
-  <hr>
-  <h3>Role: <% if (user.role === 1) { %>
-    Admin
-    <% } else if (user.role === 3) { %>
-    Merchant
-    <% } else { %>
-    Registered
-    <% if (user.isApplyingForMerchant) { %>
-    and applying for the merchant status
-    <%}
-    } %></h3>
-  <hr>
-  <h3>contact: {{ user.email }} </h3>
-
-  <a class="btn btn-medium btn-primary" href="/user/edit">Edit</a>
+  <div id="content" ng-controller="ProfileController">
+    <div class="container">
+      <div class="box">
+        <img src="<%= user.gravatarUrl %>" />
+        <h3>Name: {{ user.name }} </h3>
+        <hr>
+        <h3>Address: {{ user.address }} </h3>
+        <hr>
+        <h3>Phone number: {{ user.phone }} </h3>
+        <hr>
+        <h3>Last logged in at: {{ user.lastLoggedIn }} </h3>
+        <hr>
+        <h3>Role: <% if (user.role === 1) { %>
+          Admin
+          <% } else if (user.role === 3) { %>
+          Merchant
+          <% } else { %>
+          Registered
+          <% if (user.isApplyingForMerchant) { %>
+          and applying for the merchant status
+          <%}
+          } %></h3>
+        <hr>
+        <h3>contact: {{ user.email }} </h3>
+        <% if (user.id == me) { %>
+          <a class="btn btn-medium btn-primary" href="/user/edit">Edit</a>
+        <%}%>
+      </div>
+    </div>
   </div>
 </div>
 <script type="text/javascript">
