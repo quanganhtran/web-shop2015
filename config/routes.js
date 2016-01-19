@@ -78,6 +78,7 @@ module.exports.routes = {
    * Web routes always returns a view.
    */
   'GET /item/:id': 'ItemController.info',
+  'GET /order/:id': 'OrderController.info',
   'GET /user/:username': 'UserController.info'
 
 }
