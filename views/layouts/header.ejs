@@ -1,36 +1,38 @@
-<div class="container-fluid" ng-controller="HeaderController" ng-cloak="">
+<div ng-controller="HeaderController" ng-cloak>
   <!-- Creates the navbar for non-user -->
   <nav class="navbar navbar-inverse" ng-show="!me">
-    <!-- This creates the mechanism for collapse button -->
-    <button type="button" class="navbar-toggle" data-toggle="collapse" ng-init="navCollapsed = true"
-            ng-click="navCollapsed = !navCollapsed">
-      <!-- This controls the number of lines in the image when the nav collapse -->
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
+    <div class="container">
+      <!-- This creates the mechanism for collapse button -->
+      <button type="button" class="navbar-toggle" data-toggle="collapse" ng-init="navCollapsed = true"
+              ng-click="navCollapsed = !navCollapsed">
+        <!-- This controls the number of lines in the image when the nav collapse -->
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
 
-    <!-- This is the brand on the left-hand side. -->
-    <a class="navbar-brand" href="/#"> 'Asian sweatshop'</a>
+      <!-- This is the brand on the left-hand side. -->
+      <a class="navbar-brand" href="/#"> 'Asian sweatshop'</a>
 
-    <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
-      <form ng-submit="submitLoginForm()" class="navbar-form navbar-right">
+      <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
+        <form ng-submit="submitLoginForm()" class="navbar-form navbar-right">
 
-        <div class="form-group">
-          <input ng-model="loginForm.username" type="text" placeholder="Username" name="username"
-                 class="form-control">
-        </div>
-        <div class="form-group">
-          <input ng-model="loginForm.password" type="password" placeholder="Password" name="password"
-                 class="form-control">
-        </div>
-        <button type="submit" class="btn btn-success" onclick="simpleCart.empty();">
-          <span ng-show="!loginForm.loading">Sign in</span>
-          <span ng-show="loginForm.loading" class="fa fa-spinner"></span>
-          <span ng-show="loginForm.loading">Signing in...</span>
-        </button>
-        <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
-      </form>
+          <div class="form-group">
+            <input ng-model="loginForm.username" type="text" placeholder="Username" name="username"
+                   class="form-control">
+          </div>
+          <div class="form-group">
+            <input ng-model="loginForm.password" type="password" placeholder="Password" name="password"
+                   class="form-control">
+          </div>
+          <button type="submit" class="btn btn-success" onclick="simpleCart.empty();">
+            <span ng-show="!loginForm.loading">Sign in</span>
+            <span ng-show="loginForm.loading" class="fa fa-spinner"></span>
+            <span ng-show="loginForm.loading">Signing in...</span>
+          </button>
+          <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
+        </form>
+      </div>
     </div>
   </nav>
   <!-- Creates the navbar for logged in user -->
@@ -84,7 +86,7 @@
           <a href="/cart">My Cart <span class="simpleCart_quantity"></span></a>
         </li>
         <li>
-          <a href="/#">My order</a>
+          <a href="/myOrder">My order</a>
         </li>
         <li>
           <a href="/logout">Sign-out</a>

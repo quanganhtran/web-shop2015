@@ -68,23 +68,5 @@ app.factory('SessionService', function ($http) {
         cb_err(err);
       });
     }
-    //login: function (user, cb, err_cb ) {
-    //  // Submit request to Sails.
-    //  $http.put('/login', {
-    //      username: user.username,
-    //      password: user.password
-    //  }).then(function onSuccess(res) {
-    //      cb(res);
-    //  }, function onError(err) {
-    //      err_cb(err);
-    //  });
-    //},
-    //logout: function (cb, err_cb) {
-    //  $http.get('/logout').then(function (res) {
-    //    return cb(res);
-    //  }, function (err) {
-    //    return err_cb(err);
-    //  });
-    //}
   }
 });

@@ -60,6 +60,9 @@ module.exports.routes = {
   'POST /user/edit': 'UserController.edit',
   'GET /user/setMerchant/:id': 'UserController.setMerchant',
   'GET /user/suspend/:id': 'UserController.suspend',
+  'GET /myOrder': { view: 'user/myOrder' },
+  // 'GET /getOrders': 'OrderController.getOrders',
+  // 'GET /getOrderDetails': 'OrderDetailController.getOrderDetails',
   // Item routes
   'GET /products': 'ItemController.showProducts',
   'GET /addItem': 'ItemController.addItem',
@@ -68,8 +71,8 @@ module.exports.routes = {
   'GET /cart': {
     view: 'user/cart'
   },
-  'POST /purchase': {},
-
+  'POST /purchase': 'OrderController.prepare',
+  'GET /success': { view: 'user/success' },
   /*
    * Web routes here
    * Web routes always returns a view.

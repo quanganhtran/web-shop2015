@@ -4,6 +4,7 @@
   <table class="table">
     <tr>
       <th>Username</th>
+      <th>Gravatar</th>
       <th>E-mail</th>
       <th>Name</th>
       <th>Role</th>
@@ -11,10 +12,11 @@
       <th></th>
       <th></th>
       <th></th>
-      <th>Accept</th>
+      <th>Accept as Merchant</th>
     </tr>
     <tr ng-repeat="u in users">
       <td>{{ u.username }}</td>
+      <th><img src="{{ u.gravatarUrl }}" style="width:40px;"/></th>
       <td>{{ u.email }}</td>
       <td>{{ u.name }}</td>
       <td>{{ u.role.name }}</td>
@@ -33,7 +35,6 @@
         <a class="setMerchant" ng-show="u.isApplyingForMerchant" data-id="{{ u.id }}">Accept as merchant</a>
       </td>
     </tr>
-
   </table>
 </div>
 <script src="js/pages/userList.js"></script>

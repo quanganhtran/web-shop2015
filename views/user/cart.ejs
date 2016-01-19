@@ -1,42 +1,13 @@
 <script type="text/javascript">
-    simpleCart.email = "pghoou@hotmail.com";
-    simpleCart.cartHeaders = ['Image', 'Name', 'Price', 'Options', 'Quantity_input', 'Total'];
-    simpleCart({
-        // array representing the format and columns of the cart,
-        // see the cart columns documentation
-        cartColumns: [
-            { attr: "name", label: "Name"},
-            { view: "currency", attr: "price", label: "Price"},
-            { view: "decrement", label: ''},
-            { attr: "quantity", label: "Qty"},
-            { view: "increment", label: ''},
-            { view: "currency", attr: "total", label: "SubTotal" },
-            { view: "remove", text: "Remove", label: false}
-        ],
 
-        cartStyle: "table",
-
-        currency: "EUR",
-
-        checkout: {
-            type: "PayPal",
-            email: "you@yours.com"
-        }
-    });
 </script>
-<div ng-app="CartModule" ng-cloak>
+<div style="text-align: center; width:100%; height:100%;" ng-app="CartModule" ng-cloak>
 <%- partial('../layouts/header') %>
-  <div style="text-align: center;display: block;margin: auto;width: 30%;">
-    <table class="simpleCart_items" ng-class="textType"></table>
-  </div>
-  <input type="hidden" ng-model="textType" value="table success">
+    <table class="simpleCart_items"></table>
+  <span class="simpleCart_quantity"></span> items - <span class="simpleCart_total"></span>
+  <a href="#" class="checkout">Checkout</a>
+  <a href="#" onclick="simpleCart.empty();return false;" class="simpleCart_empty">empty cart</a>
 </div>
-<script type="text/javascript">
-  simpleCart.bind("afterCreate", function(){
-    $cart_table = $(".simpleCart_items table");
-    $cart_table.addClass("table").addClass("table-hover");
-    $cart_table.find('.simpleCart_decrement').addClass("fa fa-minus-circle").html('');
-    $cart_table.find('.simpleCart_increment').addClass("fa fa-plus-circle").html('');
-  });
-</script>
-<script src="js/pages/CartModule.js"></script>
+
+<script type="text/javascript" src="js/pages/CartModule.js"></script>
+<script type="text/javascript" src="js/pages/simpleCartConfig.js"></script>

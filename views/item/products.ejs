@@ -22,23 +22,23 @@
             <td><span class="item_price"><%= item.price %></span></td>
             <td><%= item.createdBy.username %></td>
             <td><%= item.description %></td>
-            <td><img style="width:100px; height: 100px;" src="<%= item.imagePath %>"></td>
+            <td><img class="item_imagePath" style="width:100px; height: 100px;" src="<%= item.imagePath %>"></td>
             <td>
-              <input type="number" min="1" class="item_Quantity" value="1">
+              <input type="number" min="1" class="item_Quantity" value="1" style="width:40%;">
             </td>
             <td>
               <% if (item.isAvailable) { %>
               <button class="item_add btn btn-medium btn-primary" href="#" type="submit">
-              Add to cart
+                Add to cart
               </button>
               <% } %>
             </td>
             <td>
               <% if (!item.isAvailable) { %>
               <a href="#"> Banned</a>
-                <% } else { %>
-                <a href="#">Purchase</a>
-                  <% } %>
+              <% } else { %>
+              <a href="#">Purchase</a>
+              <% } %>
 
             </td>
           </tr>
@@ -46,53 +46,11 @@
       </form>
       <% }) %>
     </table>
-    <table class="simpleCart_items"></table>
+    <table class="simpleCart_items" style="text-align: center;"></table>
     <span class="simpleCart_quantity"></span> items - <span class="simpleCart_total"></span>
-    <a href="javascript:;" class="simpleCart_checkout">Checkout</a>
+    <a href="#" class="checkout">Checkout</a>
     <a href="#" onclick="simpleCart.empty();return false;" class="simpleCart_empty">empty cart</a>
   </div>
 </div>
-<script src="js/pages/product/ProductsModule.js"></script>
-<script type="text/javascript">
-  simpleCart.email = "pghoou@hotmail.com";
-  simpleCart.cartHeaders = ['Image', 'Name', 'Price', 'Options', 'Quantity_input', 'Total'];
-  simpleCart({
-    // array representing the format and columns of the cart,
-    // see the cart columns documentation
-    cartColumns: [
-      { attr: "name", label: "Name"},
-      { view: "currency", attr: "price", label: "Price"},
-      { view: "decrement", label: false},
-      { attr: "quantity", label: "Quantity"},
-      { view: "increment", label: false},
-      { view: "currency", attr: "total", label: "SubTotal" },
-      { view: "remove", text: "Remove", label: false}
-    ],
-
-    cartStyle: "table",
-
-    currency: "EUR",
-
-    checkout: {
-      type: "PayPal",
-      email: "you@yours.com"
-    }
-  });
-</script>
-<script>
-  $(function () {
-    $('.item_add').on('click', function () {
-      console.log('clicked');
-      var id = $(this).closest("tr").data("id");
-      console.log(id);
-      var quantity = $(this).closest("tr").find(".item_Quantity").val();
-      console.log(quantity);
-      var name = $(this).closest("tr").find(".item_name").html();
-      console.log(name);
-      var price = $(this).closest("tr").find(".item_price").html();
-      console.log(price);
-      console.log('quantity=' + quantity, 'name=' + name, 'price=' + price);
-      simpleCart.add({quantity: quantity,  name:name, price:price});
-    });
-  });
-</script>
+<script type="text/javascript" src="js/pages/product/ProductsModule.js"></script>
+<script type="text/javascript" src="js/pages/simpleCartConfig.js"></script>
