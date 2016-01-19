@@ -1,7 +1,7 @@
 /**
  * isMerchant
  *
- * @module      :: Policy
+ * @module      Policy
  * @description :: Policy to allow only a merchant to put new items up for sale
  * @docs        :: http://sailsjs.org/#!/documentation/concepts/Policies
  * @author      :: quanganhtran

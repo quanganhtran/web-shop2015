@@ -1,7 +1,7 @@
 /**
  * isLoggedIn
  *
- * @module      :: Policy
+ * @module      Policy
  * @description :: check if the user is logged in
  * @help        :: http://sailsjs.org/#!/documentation/concepts/Policies
  */
