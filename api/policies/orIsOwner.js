@@ -1,7 +1,7 @@
 /**
  * isOwner
  *
- * @module      :: Policy
+ * @module      Policy
  * @description :: Policy to allow only the owner of an object (Item or Order) to perform actions on that object
  * @docs        :: http://sailsjs.org/#!/documentation/concepts/Policies
  * @author      :: quanganhtran

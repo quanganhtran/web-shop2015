@@ -1,13 +1,20 @@
 /**
 * User.js
 *
-* @description :: User information.
-* @docs        :: http://sailsjs.org/#!documentation/models
+* @module       Model/User
+* @description  Holds information about the users.
 */
 
 module.exports = {
   //autoPK: false,
+  /**
+   * @instance {String} username Username
+   * @namespace
+   */
   attributes: {
+    /**
+     * @instance {String} username Username
+     */
     username: {
       type: 'string',
       size: 16,
@@ -68,16 +75,6 @@ module.exports = {
       defaultsTo: false
     }
   },
-
-  /**
-   * Check validness of a login using the provided inputs.
-   * But encrypt the password first.
-   *
-   * @param {Object} inputs
-   * @param {String} inputs.username
-   * @param {String} inputs.password
-   * @param {Function} cb
-   */
 
   attemptLogin: function (inputs, cb) {
     User.findOne({

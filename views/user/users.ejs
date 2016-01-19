@@ -1,46 +1,50 @@
 <div class="container-fluid" ng-app="UserList" ng-controller="UserListController" ng-cloak>
   <%- partial('../layouts/header') %>
-  <h3>Users</h3>
-  <table class="table">
-    <tr>
-      <th>Username</th>
-      <th>Gravatar</th>
-      <th>E-mail</th>
-      <th>Name</th>
-      <th>Role</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th>Accept as Merchant</th>
-    </tr>
-    <tr ng-repeat="u in users">
-      <td>{{ u.username }}</td>
-      <th><img src="{{ u.gravatarUrl }}" style="width:40px;"/></th>
-      <td>{{ u.email }}</td>
-      <td>{{ u.name }}</td>
-      <td>{{ u.role.name }}</td>
-      <td><a href="#">Show</a></td>
-      <td><a href="#">Edit</a></td>
-      <td>
-        <a class="suspend" ng-show="u.isSuspended" data-id="{{ u.id }}">Unsuspend</a>
-        <a class="suspend" ng-show="!u.isSuspended" data-id="{{ u.id }}">Suspend</a>
-      </td>
-      <td>
-        <p>
-          <span ng-show="u.isApplyingForMerchant">wants to be merchant</span>
-        </p>
-      </td>
-      <td>
-        <a class="setMerchant" ng-show="u.isApplyingForMerchant" data-id="{{ u.id }}">Accept as merchant</a>
-      </td>
-    </tr>
-  </table>
+  <div class="container">
+    <div class="box">
+      <h3>Users</h3>
+      <table class="table">
+        <tr>
+          <th>Username</th>
+          <th>Gravatar</th>
+          <th>E-mail</th>
+          <th>Name</th>
+          <th>Role</th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th>Accept</th>
+        </tr>
+        <tr ng-repeat="u in users">
+          <td>{{ u.username }}</td>
+          <th><img src="{{ u.gravatarUrl }}" style="width:40px;"/></th>
+          <td>{{ u.email }}</td>
+          <td>{{ u.name }}</td>
+          <td>{{ u.role.name }}</td>
+          <td><a href="#">Show</a></td>
+          <td><a href="#">Edit</a></td>
+          <td>
+            <a class="suspend" ng-show="u.isSuspended" data-id="{{ u.id }}">Unsuspend</a>
+            <a class="suspend" ng-show="!u.isSuspended" data-id="{{ u.id }}">Suspend</a>
+          </td>
+          <td>
+            <p>
+              <span ng-show="u.isApplyingForMerchant">wants to be merchant</span>
+            </p>
+          </td>
+          <td>
+            <a class="setMerchant" ng-show="u.isApplyingForMerchant" data-id="{{ u.id }}">Accept as merchant</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
 </div>
 <script src="js/pages/userList.js"></script>
 <script>
   $(document).ready(function(){
-    $('.table').on('click', '.setMerchant', function () {
+    $('.setMerchant').click(function () {
       var id = $(this).data("id");
       console.log(id);
       $.get('/user/setMerchant/' + id, function (data, status) {

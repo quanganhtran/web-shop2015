@@ -1,20 +1,19 @@
 /**
  * ItemController
  *
- * @description :: Server-side logic for managing items
- * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
+ * @module Controller/ItemController
+ * @description Server-side logic for managing items
  */
 
 module.exports = {
 
   /**
-   * ItemController.submit()
    * Put a new line of products up for sale
    *
-   * @param  {Object}   req
-   *                     • name  {String}
-   *                     • price {Float}
-   * @param  {Object} res
+   * @param  {Object}   req Request object
+   * @param  {String}   req.param("name")
+   * @param  {float}    req.param("price")
+   * @param  {Object}   res Response object
    */
   submit: function (req, res) {
     if (!req.session.me) return res.forbidden();

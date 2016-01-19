@@ -1,8 +1,8 @@
 /**
  * UserController
  *
- * @description :: Server-side logic for managing users
- * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
+ * @module Controller/UserController
+ * @description Server-side logic for managing users
  */
 
 module.exports = {
@@ -15,7 +15,6 @@ module.exports = {
       res.view('user/edit', {me: user});
     });
   },
-
 
 // render the profile view (/views/profile.ejs)
   showProfile: function (req, res) {
@@ -107,7 +106,13 @@ module.exports = {
   },
 
   /**
-   * `UserController.login()`
+   * Authenticate an user using a username and password.
+   * If the user is already authenticated, return identification.
+   *
+   * @param {Object} req                    Request object
+   * @param {String} req.param("username")  Username
+   * @param {String} req.param("password")  Password
+   * @param {Object} res                    Response object
    */
   login: function (req, res) {
     if (req.session.me) {
@@ -164,11 +169,10 @@ module.exports = {
   },
 
   /**
-   * UserController.logout()
    * Logout the current user
    *
-   * @param  {Object}   req
-   * @param  {Function} res
+   * @param {Object} req                Request object
+   * @param {Object} res                Response object
    */
   logout: function (req, res) {
 
@@ -194,18 +198,16 @@ module.exports = {
   ,
 
   /**
-   * UserController.signup()
    * Register a new user
    *
-   * @param  {Object}   req
-   * @param  {Function} req.param
-   * @prop   {String}   username
-   * @prop   {String}   password
-   * @prop   {String}   address
-   * @prop   {String}   phone
-   * @prop   {String}   name
-   * @prop   {String}   email
-   * @param  {Function} res
+   * @param  {Object}   req Request object
+   * @param  {Object}   req.param("username")
+   * @param  {Object}   req.param("password")
+   * @param  {String}   req.param("address")
+   * @param  {String}   req.param("phone")
+   * @param  {String}   req.param("name")
+   * @param  {String}   req.param("email")
+   * @param  {Object}   res Response object
    */
   signup: function (req, res) {
     var Passwords = require('machinepack-passwords');
@@ -299,15 +301,13 @@ module.exports = {
   ,
 
   /**
-   * UserController.setMerchant()
    * Promote a user to be a merchant, or demote a merchant.
    * A merchant has the right to put up items for sale.
    *
-   * @param  {Object}   req
-   * @param  {Object}   req.params
-   *                     • id
-   *                     • role {Integer}
-   * @param  {Function} res
+   * @param  {Object}   req Request object
+   * @param  {int}      req.params("id")
+   * @param  {int}      req.params("role")
+   * @param  {Object}   res Response object
    */
   setMerchant: function (req, res) {
     User.findOne(req.param('id')).exec(function (err, user) {
@@ -378,18 +378,20 @@ module.exports = {
    * UserController.info()
    * Display a user profile
    *
-   * @param req
-   * @param res
+   * @param  {Object}   req                     Request object
+   * @param  {String}   req.params("username")  Username of the user being looked up
+   * @param  {Object}   res                     Response object
    */
   info: function (req, res) {
-    //if (res.wantsJSON) {
-    //  return res.redirect('/api/user' + req.param('id'));
-    //}
+    if (res.wantsJSON) {
+      return res.redirect('/api/user/?username=' + req.param('username'));
+    }
     User.findOne({username: req.param('username')}).exec(function (err, user) {
       if (err) return res.negotatiate(err);
       if (!user) return res.notFound();
       return res.view('user/profile', {
-        user: user
+        user: user,
+        me: req.session.me
       })
     });
   }

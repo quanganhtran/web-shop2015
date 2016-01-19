@@ -1,0 +1,25 @@
+<div ng-app="OrderModule" ng-cloak>
+  <%- partial('../layouts/header') %>
+  <div id="content" ng-controller="OrderController">
+    <div class="container">
+      <div class="box">
+        <h2>Summary</h2>
+        <hr>
+        <p>ID: {{ order.id }} </p>
+        <p>Date placed: {{ order.createdAt }} </p>
+      </div>
+      <div class="box">
+        <h2>Details</h2>
+        <div ng-repeat="od in order.orderDetails">
+          <p>Item: {{ od.name }}</p>
+          <p>Quantity: {{ od.quantity }}</p>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  window.SAILS_LOCALS.order = <%- JSON.stringify(order) %>;
+</script>
+<script src="/js/pages/order.js"></script>
