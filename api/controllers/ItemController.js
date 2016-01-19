@@ -90,8 +90,8 @@ module.exports = {
    */
   showProducts: function (req, res) {
     User.findOne(req.session.me, function foundUser(err, user) {
-      if (err) return next(err);
-      if (!user) return next();
+      if (err) return res.negotiate(err);
+      if (!user) return res.notFound();
       Item.find().populate('createdBy').exec(function foundItem(err, items) {
         if (err) return res.negotiate(err);
         return res.view('item/products', {

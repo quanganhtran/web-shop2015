@@ -40,7 +40,19 @@ module.exports.policies = {
     update: false,
     submit: 'isMerchant',
     modify: 'isOwner',
-    destroy: ['orIsOwner', 'orIsAdmin', 'orPolicy']
+    suspend: 'isAdmin',
+    destroy: ['orIsOwner', 'orIsAdmin', 'orPolicy'],
+
+    showProducts: 'isLoggedIn',
+    addItem: 'isLoggedIn',
+    banItem: ['orIsOwner', 'orIsAdmin', 'orPolicy']
+  },
+
+  OrderController: {
+    '*': true,
+    create: false,
+    read: 'isOwner',
+    prepare: 'isLoggedIn'
   }
 
 	// RabbitController: {
