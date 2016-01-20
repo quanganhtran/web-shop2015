@@ -2,7 +2,7 @@
  * orPolicy
  *
  * @module      Policy
- * @description :: TODO: You might write a short summary of how this policy works and what it represents here.
+ * @description :: When used orPolicy, check the or condition is fulfilled as the last policy
  * @help        :: http://sailsjs.org/#!/documentation/concepts/Policies
  */
 module.exports = function(req, res, next) {

@@ -1,27 +1,31 @@
-<div ng-app="myOrderModule" ng-controller="myOrderController" ng-cloak style="text-align: center;">
+
+<div class="container" ng-app="myOrderModule" ng-controller="myOrderController" ng-cloak style="text-align: center;">
   <%- partial('../layouts/header') %>
+  <div class="box">
   <h3>Your Orders</h3>
-
-  <table class="table" >
-    <tr>
-      <th>Order ID</th>
-      <th>Order Date</th>
-      <th></th>
-    </tr>
-    <tr ng-repeat="o in orders">
-      <td>{{ o.id }}</td>
-      <td>{{ o.createdAt }}</td>
-    </tr>
-  </table>
-
+  <!-- Render order list page. OID, date, buyer, total price-->
   <table class="table">
     <tr>
-      <th>Item Name</th>
+      <th>Order ID</th>
+      <th>Items</th>
+      <th>Seller</th>
+      <th ng-show="me.role === 1">Buyer</th>
+      <th>Total Price</th>
+      <th>Order Date</th>
+
+
+      <th></th>
     </tr>
-    <tr ng-repeat="od in orderDetails">
-      <td>{{ od.item.name }}</td>
+    <tr ng-repeat="row in rows">
+      <td>{{ row.oid}}</td>
+      <td><p ng-repeat="item in row.items">{{ item.itemName }} X {{ item.itemQty }}</p></td>
+      <td><p ng-repeat="item in row.items">{{ item.itemSeller }}</p></td>
+      <td ng-show="me.role === 1">{{ row.buyer }}</td>
+      <td>{{ row.orderPrice }}€</td>
+      <td>{{ row.date }}</td>
+      <td><a href="/order/{{row.oid}}">View details</a></td>
     </tr>
   </table>
-{{ orders }}
+  </div>
 </div>
 <script type="text/javascript" src="js/pages/myOrder.js"></script>
