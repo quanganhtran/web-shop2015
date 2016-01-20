@@ -1,4 +1,4 @@
-<div id="all" ng-app="ItemModule">
+<div id="all" ng-app="ItemModule" ng-cloak>
 <%- partial('../layouts/header') %>
 
   <!--<div class="col-md-8 col-md-offset-2" ng-controller="ItemController">-->
@@ -9,25 +9,24 @@
   <!--</div>-->
 
   <div id="content">
-  <div class="container" ng-controller="ItemController">
-
+  <div class="container item_add" ng-controller="ItemController" >
     <div class="row" id="productMain">
       <div class="col-md-6">
         <div id="mainImage">
-          <img ng-src="{{ item.imagePath }}" alt="" class="img-responsive center-block">
+          <img ng-src="{{ item.imagePath }}" alt="" class="img-responsive center-block item_image">
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="box">
-          <h1 class="text-center">{{ item.name }}</h1>
+          <h1 class="text-center item_name">{{ item.name }}</h1>
+          <input class="item_id" type="hidden" data-id="{{ item.id}}" />
           <p class="goToDescription"><a href="#details" class="scroll-to">Scroll to product details, material & care and sizing</a>
           </p>
-          <p class="price">${{ item.price }}</p>
-
+          <p class="price item_price" data-price="{{ item.price }}"> €{{ item.price }} &nbsp;&nbsp;&nbsp; <input type="number" min="1" class="item_quantity" value="1" style="width:10%;"/> pcs</p>
           <p class="text-center buttons">
-            <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-            <a href="basket.html" class="btn btn-default"><i class="fa fa-heart"></i> Add to wishlist</a>
+            <a class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+            <!--<a href="basket.html" class="btn btn-default"><i class="fa fa-heart"></i> Add to wishlist</a>-->
           </p>
         </div>
       </div>
@@ -44,13 +43,8 @@
         </p>
       </blockquote>
     </div>
-
   </div>
   </div>
-
-
-
-
 </div>
 <script type="text/javascript">
   window.SAILS_LOCALS.item = <%- JSON.stringify(item) %>;
@@ -59,5 +53,32 @@
   var app = angular.module('ItemModule', ['SessionModule']);
   app.controller('ItemController', function($scope, $http) {
     $scope.item = window.SAILS_LOCALS.item;
+  });
+</script>
+<script type="text/javascript" >
+  $(function () {
+    $('.item_add').on('click', function (e) {
+      e.preventDefault();
+      e.preventBubble();
+      e.stopPropagation();
+      var id = $(this).find('.item_id').data("id");
+      var quantity = $(this).find('.item_quantity').val();
+      var name = $(this).find('.item_name').html();
+      var price = $(this).find('.item_price').data("price");
+      var imagePath = $(this).find('.item_image').attr('ng-src');
+      console.log(id);
+      console.log(quantity);
+      console.log(name);
+      console.log(price);
+      console.log(imagePath);
+      simpleCart.add(
+        {
+          iid: id,
+          quantity: quantity,
+          name: name,
+          price: price,
+          thumb: imagePath
+        });
+    });
   });
 </script>
