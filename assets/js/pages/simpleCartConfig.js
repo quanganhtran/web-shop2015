@@ -41,7 +41,6 @@ $(function () {
   $('.checkout').on('click', function (event) {
     event.preventDefault();
     simpleCart.checkout();
-    window.location = '/success';
   });
 
   $('.item_add').on('click', function () {
@@ -49,9 +48,13 @@ $(function () {
     var quantity = $(this).closest("tr").find(".item_Quantity").val();
     var name = $(this).closest("tr").find(".item_name").html();
     var price = $(this).closest("tr").find(".item_price").html();
-    var imagePath = $(this).closest("tr").find(".item_imagePath").attr('src');
+    var imagePath = $(this).closest("tr").find("img").attr('src');
     console.log(id);
-    var myItem = simpleCart.add(
+    console.log(quantity);
+    console.log(name);
+    console.log(price);
+    console.log(imagePath);
+    simpleCart.add(
       {
         iid: id,
         quantity: quantity,

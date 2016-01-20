@@ -40,7 +40,7 @@ module.exports = {
             sails.log.error('Cannot create an OrderDetail.');
             return res.badRequest('Cannot process the request submitted.');
           });
-          return res.ok();
+          return res.redirect(req.param('return'));
         });
       } catch (e) {
         sails.log.error(e);

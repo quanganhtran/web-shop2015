@@ -1,4 +1,6 @@
 /**
+ * TODO: should it be deleted maybe?
+ *
  * Created by Anh on 12/9/2015.
  */
 var app = angular.module('SessionModule', ['toastr', 'compareTo', 'ngCookies']);

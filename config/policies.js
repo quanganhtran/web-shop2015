@@ -49,7 +49,7 @@ module.exports.policies = {
   },
 
   OrderController: {
-    '*': true,
+    '*': 'isLoggedIn',
     create: false,
     read: 'isOwner',
     prepare: 'isLoggedIn'

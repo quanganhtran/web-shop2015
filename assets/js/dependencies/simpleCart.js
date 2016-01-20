@@ -512,7 +512,6 @@
 			 *******************************************************************/
 			simpleCart.extend({
 
-				// TODO: tax and shipping
 				tax: function () {
 					var totalToTax = settings.taxShipping ? simpleCart.total() + simpleCart.shipping() : simpleCart.total(),
 						cost = simpleCart.taxRate() * totalToTax;
@@ -1014,7 +1013,6 @@
 
 					// build basic form options
 					var data = {
-							// TODO: better shipping support for this google
 							  ship_method_name_1	: "Shipping"
 							, ship_method_price_1	: simpleCart.shipping()
 							, ship_method_currency_1: simpleCart.currency().code
@@ -1390,7 +1388,7 @@
 			simpleCart.ELEMENT = function (selector) {
 
 				this.create(selector);
-				this.selector = selector || null; // "#" + this.attr('id'); TODO: test length?
+				this.selector = selector || null; // "#" + this.attr('id');
 			};
 
 			simpleCart.extend(selectorFunctions, {

@@ -74,15 +74,6 @@ module.exports = {
       type: 'boolean',
       defaultsTo: false
     }
-  },
-
-  attemptLogin: function (inputs, cb) {
-    User.findOne({
-        username: inputs.username,
-        // TODO: But encrypt the password first
-        password: inputs.password
-      })
-      .exec(cb);
   }
 
 };
