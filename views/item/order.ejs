@@ -11,7 +11,7 @@
       <div class="box">
         <h2>Details</h2>
         <div ng-repeat="od in order.orderDetails">
-          <p>Item: {{ od.name }}</p>
+          <p>Item: <a href="/item/{{ od.item }}">{{ od.item }}</a></p>
           <p>Quantity: {{ od.quantity }}</p>
           <hr>
         </div>

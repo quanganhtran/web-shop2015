@@ -22,7 +22,7 @@
           <td>{{ u.email }}</td>
           <td>{{ u.name }}</td>
           <td>{{ u.role.name }}</td>
-          <td><a href="#">Show</a></td>
+          <td><a href="/user/{{ u.username }}">Show</a></td>
           <td><a href="#">Edit</a></td>
           <td>
             <a class="suspend" ng-show="u.isSuspended" data-id="{{ u.id }}">Unsuspend</a>

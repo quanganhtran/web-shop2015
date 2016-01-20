@@ -23,9 +23,9 @@
               <td><span class="item_price"><%= item.price %></span></td>
               <td><%= item.createdBy.username %></td>
               <td><%= item.description %></td>
-              <td>image</td>
+              <td><img class="item_imagePath" style="width:100px; height: 100px;" src="<%= item.imagePath %>"></td>
               <td>
-                <input type="number" min="1" class="item_Quantity" value="1">
+                <input type="number" min="1" class="item_Quantity" value="1" style="width:40%;">
               </td>
               <td>
                 <% if (item.isAvailable) { %>
@@ -44,49 +44,13 @@
             </tr>
           </div>
         </form>
-        <% }) %>
+        <% }); %>
       </table>
-      <table class="simpleCart_items"></table>
+      <table class="simpleCart_items" style="text-align: center;"></table>
       <span class="simpleCart_quantity"></span> items - <span class="simpleCart_total"></span>
-      <a href="javascript:;" class="simpleCart_checkout">Checkout</a>
+      <a href="#" class="checkout">Checkout</a>
       <a href="#" onclick="simpleCart.empty();return false;" class="simpleCart_empty">empty cart</a>
     </div>
-      <% _.each(items, function(item) { %>
-      <form id="add-form" class="add-edit" name="addCart">
-        <div class="simpleCart_shelfItem">
-          <tr data-id="<%= item.id %>" data-model="item">
-            <td><p class="item_name"><%= item.name %></p></td>
-            <td><span class="item_price"><%= item.price %></span></td>
-            <td><%= item.createdBy.username %></td>
-            <td><%= item.description %></td>
-            <td><img class="item_imagePath" style="width:100px; height: 100px;" src="<%= item.imagePath %>"></td>
-            <td>
-              <input type="number" min="1" class="item_Quantity" value="1" style="width:40%;">
-            </td>
-            <td>
-              <% if (item.isAvailable) { %>
-              <button class="item_add btn btn-medium btn-primary" href="#" type="submit">
-                Add to cart
-              </button>
-              <% } %>
-            </td>
-            <td>
-              <% if (!item.isAvailable) { %>
-              <a href="#"> Banned</a>
-              <% } else { %>
-              <a href="#">Purchase</a>
-              <% } %>
-
-            </td>
-          </tr>
-        </div>
-      </form>
-      <% }) %>
-    </table>
-    <table class="simpleCart_items" style="text-align: center;"></table>
-    <span class="simpleCart_quantity"></span> items - <span class="simpleCart_total"></span>
-    <a href="#" class="checkout">Checkout</a>
-    <a href="#" onclick="simpleCart.empty();return false;" class="simpleCart_empty">empty cart</a>
   </div>
 </div>
 <script type="text/javascript" src="js/pages/product/ProductsModule.js"></script>
