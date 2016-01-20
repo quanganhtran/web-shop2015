@@ -9,7 +9,7 @@
   <!--</div>-->
 
   <div id="content">
-  <div class="container item_add" ng-controller="ItemController" >
+  <div class="container" ng-controller="ItemController" >
     <div class="row" id="productMain">
       <div class="col-md-6">
         <div id="mainImage">
@@ -25,12 +25,11 @@
           </p>
           <p class="price item_price" data-price="{{ item.price }}"> €{{ item.price }} &nbsp;&nbsp;&nbsp; <input type="number" min="1" class="item_quantity" value="1" style="width:10%;"/> pcs</p>
           <p class="text-center buttons">
-            <a class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+            <a class="btn btn-primary item_add"><i class="fa fa-shopping-cart"></i> Add to cart</a>
             <!--<a href="basket.html" class="btn btn-default"><i class="fa fa-heart"></i> Add to wishlist</a>-->
           </p>
         </div>
       </div>
-
     </div>
 
     <div class="box" id="details">
@@ -59,13 +58,12 @@
   $(function () {
     $('.item_add').on('click', function (e) {
       e.preventDefault();
-      e.preventBubble();
       e.stopPropagation();
-      var id = $(this).find('.item_id').data("id");
-      var quantity = $(this).find('.item_quantity').val();
-      var name = $(this).find('.item_name').html();
-      var price = $(this).find('.item_price').data("price");
-      var imagePath = $(this).find('.item_image').attr('ng-src');
+      var id = $(this).closest('.box').find('.item_id').data("id");
+      var quantity = $(this).closest('.box').find('.item_quantity').val();
+      var name = $(this).closest('.box').find('.item_name').html();
+      var price = $(this).closest('.box').find('.item_price').data("price");
+      var imagePath = $(document).find('.item_image').attr('ng-src');
       console.log(id);
       console.log(quantity);
       console.log(name);
