@@ -23,33 +23,23 @@ app.controller('myOrderController', ['$scope', '$http', 'SessionService', functi
       $http.get('/api/order').then(function (response) {
           $scope.orders = response.data;
           itemOrders = response.data;
-          //console.log('getting order');
-          //console.log(itemOrders);
         })
         .then(function (response) {
           $http.get('/api/orderDetail').then(function (response) {
             $scope.itemOrderDetails = response.data;
             itemOrderDetails = response.data;
-            //console.log('getting order');
-            //console.log(itemOrderDetails);
           }).then(function (response) {
-            // console.log('from for loop');
-            // console.log(itemOrders);
-            // console.log(itemOrderDetails);
+
             for (var i = 0; i < itemOrders.length; i++) {
-              // console.log(itemOrders[i].id);
               // admin can see everything but others see only their orders
               if (($scope.me.role === 1) || $scope.me.id === itemOrders[i].createdBy.id) {
                 for (var j = 0; j < itemOrderDetails.length; j++) {
-                  // console.log(itemOrderDetails[j].order.id);
-                  // console.log(itemOrderDetails[j]);
+
                   if (itemOrders[i].id === itemOrderDetails[j].order.id) {
-                    var sellerName = "";
                     for (var u in users){
                       if (users[u].id === itemOrderDetails[j].item.createdBy){
                         sellerNames=users[u].username;
                       }
-                      // console.log(users[u]);
                     }
                     items.push({
                       itemName: itemOrderDetails[j].item.name,
@@ -57,7 +47,6 @@ app.controller('myOrderController', ['$scope', '$http', 'SessionService', functi
                       itemSeller: sellerNames
                     });
                     orderPrice += itemOrderDetails[j].item.price * itemOrderDetails[j].quantity;
-                    // console.log(items);
                   }
                 };
                 var date = itemOrders[i].createdAt.split('T')[0];
@@ -67,17 +56,13 @@ app.controller('myOrderController', ['$scope', '$http', 'SessionService', functi
                 });
                 items = [];
                 orderPrice = 0;
-                console.log(rows);
               }
             };
             $scope.rows = rows;
-            console.log('loging scope rows');
-            console.log($scope.rows);
           })
         });
     });
   }, function (err) {
     console.log('You are not logged in.');
   });
-
 }]);
