@@ -1,8 +1,8 @@
 /**
  * OrderDetail.js
  *
- * @description :: Represents a single batch of items in an order
- * @docs        :: http://sailsjs.org/#!documentation/models
+ * @module      Model/OrderDetail
+ * @description Represents a single batch of items in an order
  */
 
 module.exports = {

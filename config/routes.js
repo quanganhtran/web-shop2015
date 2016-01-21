@@ -18,6 +18,7 @@
  *
  * For more information on configuring custom routes, check out:
  * http://sailsjs.org/#!/documentation/concepts/Routes/RouteTargetSyntax.html
+ * @namespace Configuration
  */
 
 module.exports.routes = {
@@ -59,8 +60,6 @@ module.exports.routes = {
   'GET /user/setMerchant/:id': 'UserController.setMerchant',
   'GET /user/suspend/:id': 'UserController.suspend',
   'GET /myOrder': { view: 'user/myOrder' },
-  // 'GET /getOrders': 'OrderController.getOrders',
-  // 'GET /getOrderDetails': 'OrderDetailController.getOrderDetails',
   // Item routes
   'GET /products': 'ItemController.showProducts',
   'GET /addItem': 'ItemController.addItem',

@@ -1,9 +1,9 @@
 /**
-* Role.js
-*
-* @description :: Roles on the web store: admins, users, etc.
-* @docs        :: http://sailsjs.org/#!documentation/models
-*/
+ * Role.js
+ *
+ * @module       Model/User
+ * @description  Roles on the web store: admins, users, etc.
+ */
 
 module.exports = {
   attributes: {
@@ -15,10 +15,6 @@ module.exports = {
     },
     users: {
       collection: 'user',
-      via: 'role'
-    },
-    acl: {
-      collection: 'accessControl',
       via: 'role'
     }
   }

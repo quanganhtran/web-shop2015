@@ -43,18 +43,30 @@ module.exports = {
       type: 'string',
       size: 45
     },
+    /**
+     * @instance {String} sells
+     */
     sells: {
       collection: 'item',
       via: 'createdBy'
     },
+    /**
+     * @instance {String} purchases
+     */
     purchases: {
       collection: 'order',
       via: 'createdBy'
     },
+    /**
+     * @instance {String} address
+     */
     address: {
       type: 'string',
       size: 45
     },
+    /**
+     * @instance {String} phone
+     */
     phone: {
       type: 'string',
       size: 45
@@ -66,6 +78,9 @@ module.exports = {
       type: 'string',
       size: 45
     },
+    /**
+     * @instance {String} role
+     */
     role: {
       model: 'role',
       defaultsTo: 2
