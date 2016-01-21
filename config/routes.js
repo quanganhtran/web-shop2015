@@ -53,10 +53,8 @@ module.exports.routes = {
   'GET /signup': { view: 'signup' },
   'POST /signup': 'UserController.signup',
   'PUT /login': 'UserController.login',
-  'GET /profile': 'UserController.showProfile',
   'GET /logout': 'UserController.logout',
   'GET /showUsers': 'UserController.showUsers',
-  'GET /user/edit': 'UserController.getEditView',
   'POST /user/edit': 'UserController.edit',
   'GET /user/setMerchant/:id': 'UserController.setMerchant',
   'GET /user/suspend/:id': 'UserController.suspend',
@@ -79,6 +77,8 @@ module.exports.routes = {
    */
   'GET /item/:id': 'ItemController.info',
   'GET /order/:id': 'OrderController.info',
+  'GET /user/edit': 'UserController.getEditView',
+  'GET /profile': 'UserController.showProfile',
   'GET /user/:username': 'UserController.info'
 
 }

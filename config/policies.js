@@ -34,6 +34,16 @@ module.exports.policies = {
   * and its actions                                                          *
   *                                                                          *
   ***************************************************************************/
+  UserController: {
+    '*': true,
+    create: false,
+    getEditView: 'isLoggedIn',
+    edit: 'isLoggedIn',
+    showUsers: 'isAdmin',
+    setMerchant: 'isAdmin',
+    suspend: 'isAdmin'
+  },
+
   ItemController: {
     '*': true,
     create: false,
