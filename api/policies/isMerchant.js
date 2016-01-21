@@ -1,10 +1,9 @@
 /**
  * isMerchant
  *
- * @module      Policy
- * @description :: Policy to allow only a merchant to put new items up for sale
- * @docs        :: http://sailsjs.org/#!/documentation/concepts/Policies
- * @author      :: quanganhtran
+ * @module      Policy/isMerchant
+ * @description Policy to allow only a merchant to put new items up for sale
+ * @author      quanganhtran
  *
  */
 module.exports = function(req, res, next) {

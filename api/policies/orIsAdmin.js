@@ -1,10 +1,9 @@
 /**
- * isMerchant
+ * orIsAdmin
  *
- * @module      Policy
- * @description :: Policy to allow only an admin to create and destroy items
- * @docs        :: http://sailsjs.org/#!/documentation/concepts/Policies
- * @author      :: won
+ * @module      Policy/orIsAdmin
+ * @description Allow an admin to create and destroy items. To be used in conjunction with other "or" Policies.
+ * @author      won
  *
  */
 module.exports = function(req, res, next) {

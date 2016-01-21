@@ -8,12 +8,11 @@
 module.exports = {
   //autoPK: false,
   /**
-   * @instance {String} username Username
    * @namespace
    */
   attributes: {
     /**
-     * @instance {String} username Username
+     * @instance {String} username
      */
     username: {
       type: 'string',
@@ -22,6 +21,9 @@ module.exports = {
       //primaryKey: true,
       required: true
     },
+    /**
+     * @instance {String} email
+     */
     email: {
       type: 'string',
       size: 45,
@@ -34,6 +36,9 @@ module.exports = {
       size: 200,
       required: true
     },
+    /**
+     * @instance {String} name
+     */
     name: {
       type: 'string',
       size: 45

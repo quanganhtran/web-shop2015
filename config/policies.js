@@ -51,7 +51,9 @@ module.exports.policies = {
   OrderController: {
     '*': 'isLoggedIn',
     create: false,
-    read: 'isOwner',
+    read: ['orIsOwner', 'orIsAdmin', 'orPolicy'],
+    update: false,
+    destroy: false,
     prepare: 'isLoggedIn'
   }
 

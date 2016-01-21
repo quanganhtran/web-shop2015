@@ -1,10 +1,9 @@
 /**
- * isMerchant
+ * orIsMerchant
  *
- * @module      :: Policy
- * @description :: Policy to allow only a merchant to put new items up for sale
- * @docs        :: http://sailsjs.org/#!/documentation/concepts/Policies
- * @author      :: pghoo
+ * @module      Policy
+ * @description Allow a merchant to put new items up for sale. To be used in conjunction with other "or" Policies.
+ * @author      pghoo
  *
  */
 module.exports = function(req, res, next) {
