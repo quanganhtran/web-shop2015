@@ -4,7 +4,9 @@
 var app = angular.module('myOrderModule', ['SessionModule']);
 
 
-app.controller('myOrderController', ['$scope', '$http', function ($scope, $http) {
+app.controller('myOrderController', ['$scope', '$http', 'SessionService', function ($scope, $http, SessionService) {
+
+  $scope.me = window.SAILS_LOCALS.me;
 
   // constructing data for My Orders page
   var itemOrders = [], itemOrderDetails = [], users = [], rows = [], items = [];
