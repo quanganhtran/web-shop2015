@@ -40,7 +40,10 @@ $(function () {
 
   $('.checkout').on('click', function (event) {
     event.preventDefault();
-    simpleCart.checkout();
+    simpleCart.checkout.done(function() {
+      console.log('here');
+      window.location = '/success';
+    });
   });
 
   $('.item_add').on('click', function () {

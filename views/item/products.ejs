@@ -23,7 +23,7 @@
               <td><span class="item_price"><%= item.price %></span></td>
               <td><%= item.createdBy.username %></td>
               <td><%= item.description %></td>
-              <td><img src="<%= item.imagePath%>" /></td>
+              <td><a href="/item/<%= item.id %>"><img src="<%= item.imagePath%>" /></a></td>
               <td>
                 <input type="number" min="1" class="item_Quantity" value="1">
               </td>
