@@ -1,8 +1,7 @@
 /**
  * Item.js
  *
- * @description :: Items of the web shop
- * @docs        :: http://sailsjs.org/#!documentation/models
+ * @description Items of the web shop
  */
 
 module.exports = {

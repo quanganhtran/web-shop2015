@@ -1,7 +1,6 @@
 /**
  * OrderDetail.js
  *
- * @module      Model/OrderDetail
  * @description Represents a single batch of items in an order
  */
 

@@ -1,7 +1,6 @@
 /**
  * orIsMerchant
  *
- * @module      Policy
  * @description Allow a merchant to put new items up for sale. To be used in conjunction with other "or" Policies.
  * @author      pghoo
  *

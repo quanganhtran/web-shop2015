@@ -1,7 +1,6 @@
 /**
  * isMerchant
  *
- * @module      Policy/isMerchant
  * @description Policy to allow only a merchant to put new items up for sale
  * @author      quanganhtran
  *

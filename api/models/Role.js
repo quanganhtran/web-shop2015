@@ -1,7 +1,6 @@
 /**
  * Role.js
  *
- * @module       Model/User
  * @description  Roles on the web store: admins, users, etc.
  */
 

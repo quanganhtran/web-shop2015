@@ -1,7 +1,6 @@
 /**
  * orIsAdmin
  *
- * @module      Policy/orIsAdmin
  * @description Allow an admin to create and destroy items. To be used in conjunction with other "or" Policies.
  * @author      won
  *

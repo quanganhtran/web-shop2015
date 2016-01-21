@@ -1,7 +1,6 @@
 /**
  * orIsOwner
  *
- * @module      Policy
  * @description Allow the owner of an object (Item or Order) to perform actions on that object. To be used in conjunction with other "or" Policies.
  * @author      quanganhtran
  *

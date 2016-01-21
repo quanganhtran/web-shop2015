@@ -1,7 +1,6 @@
 /**
  * orPolicy
  *
- * @module      Policy
  * @description When used orPolicy with other "or" Policies, check if the or condition is fulfilled as the last policy.
  */
 module.exports = function(req, res, next) {

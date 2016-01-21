@@ -1,7 +1,7 @@
 /**
  * PageController
  *
- * @description :: Server-side logic for managing pages
+ * @description Server-side logic for managing pages
  */
 
 module.exports = {

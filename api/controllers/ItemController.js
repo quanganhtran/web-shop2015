@@ -10,10 +10,13 @@ module.exports = {
   /**
    * Put a new line of products up for sale
    *
-   * @param  {Object}   req Request object
-   * @param  {String}   req.param("name")
-   * @param  {float}    req.param("price")
-   * @param  {Object}   res Response object
+   * @param  {Object}   req                           Request object
+   * @param  {String}   req.param("name")             Name of the product
+   * @param  {float}    req.param("price")            Price of the product
+   * @param  {Object}   req.param("uploadFile")       The file to be used as the image of the product
+   * @param  {String}   req.param("description")      Product description
+   * @param  {Date}     req.param("manufacturedDate") Manufactured date
+   * @param  {Object}   res                           Response object
    */
   submit: function (req, res) {
     if (!req.session.me) return res.forbidden();
@@ -37,7 +40,6 @@ module.exports = {
           imagePath: null,
           manufacturedDate: req.param('manufacturedDate')
         }).exec(function (err, item) {
-          console.log('WANNABE WATANABE');
           return res.ok('No file was uploaded');
         });
       } else {
@@ -62,12 +64,11 @@ module.exports = {
   },
 
   /**
-   * ItemController.modify()
    * Modify a line of products
    *
-   * @param  {Object}   req
-   *                     • price {Float}
-   * @param  {Object} res
+   * @param  {Object}           req                             Request object
+   * @param  {float}            req.params("price")             Price of the product
+   * @param  {Object}           res                             Response object
    */
   modify: function (req, res) {
     Item.update(req.param('id'), {
@@ -81,7 +82,6 @@ module.exports = {
   ,
 
   /**
-   * ItemController.showProducts()
    * Route to the page that shows products
    *
    * @param  {Object} req
@@ -103,11 +103,11 @@ module.exports = {
   ,
 
   /**
-   * ItemController.info()
    * Display an item page
    *
-   * @param req
-   * @param res
+   * @param  {Object}           req                             Request object
+   * @param  {int}              req.params("id")                ID of the product
+   * @param  {Object}           res                             Response object
    */
   info: function (req, res) {
     if (req.wantsJSON) {

@@ -1,15 +1,11 @@
 /**
 * User.js
 *
-* @module       Model/User
 * @description  Holds information about the users.
 */
 
 module.exports = {
   //autoPK: false,
-  /**
-   * @namespace
-   */
   attributes: {
     /**
      * @instance {String} username

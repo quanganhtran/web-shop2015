@@ -1,7 +1,6 @@
 /**
  * isOwner
  *
- * @module      Policy/isOwner
  * @description Policy to allow only the owner of an object (Item or Order) to perform actions on that object
  * @author      quanganhtran
  *

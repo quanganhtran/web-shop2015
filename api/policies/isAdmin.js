@@ -1,7 +1,6 @@
 /**
  * isAdmin
  *
- * @module      Policy/isAdmin
  * @description Policy to allow only an admin to create and destory items
  * @author      won
  *

@@ -1,7 +1,6 @@
 /**
  * isLoggedIn
  *
- * @module      Policy/isLoggedIn
  * @description Check if the user is logged in
  */
 module.exports = function(req, res, next) {
