@@ -19,7 +19,7 @@ module.exports = {
     } else {
       // Otherwise, look up the logged-in user and show the logged-in view,
       // bootstrapping basic user data in the HTML sent from the server
-      User.findOne(req.session.me, function (err, user){
+      User.findOne(req.session.me).populateAll().exec(function (err, user){
         if (err) {
           return res.negotiate(err);
         }

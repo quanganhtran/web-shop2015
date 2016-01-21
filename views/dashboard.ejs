@@ -2,7 +2,7 @@
   <%- partial('layouts/header') %>
   <div id="content">
     <div class="container">
-      <div class="box" ng-controller="IdentityController">
+      <div class="box" ng-controller="myOrderController">
         <h1> Logged in as '{{ me.username }}' </h1>
         <hr>
         <% if (me.role === 1) { %>
@@ -12,13 +12,34 @@
         <% } else { %>
         <h3>Welcome!</h3>
         <% } %>
-        <h3>Selling: {{ me.sells }} </h3>
+        <h3>Selling:</h3>
+        <% _.each(me.sells, function(item) { %>
+        <h4><%= item.name %></h4>
+        <% }) %>
         <hr>
-        <h3>Ordered: {{ me.purchases }} </h3>
+        <h3>Recent Orders:</h3>
+        <table class="table">
+          <tr ng-repeat="row in rows | limitTo:-5 | orderBy:'date':true">
+            <td>{{ row.oid}}</td>
+            <td><p ng-repeat="item in row.items">{{ item.itemName }} X {{ item.itemQty }}</p></td>
+            <td><p ng-repeat="item in row.items">{{ item.itemSeller }}</p></td>
+            <td ng-show="me.role === 1">{{ row.buyer }}</td>
+            <td>{{ row.orderPrice }}€</td>
+            <td>{{ row.date }}</td>
+            <td><a href="/order/{{row.oid}}">View details</a></td>
+          </tr>
+        </table>
         <hr>
       </div>
     </div>
   </div>
 
 </div>
+<script src="/js/pages/myOrder.js"></script>
 <script src="/js/pages/dashboard.js"></script>
+<script type="text/javascript">
+  window.SAILS_LOCALS = {
+    _csrf: '<%= _csrf %>',
+    me: <%- JSON.stringify(me) %>
+  };
+</script>
