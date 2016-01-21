@@ -1,10 +1,9 @@
 /**
- * isMerchant
+ * isAdmin
  *
- * @module      Policy
- * @description :: Policy to allow only an admin to create and destory items
- * @docs        :: http://sailsjs.org/#!/documentation/concepts/Policies
- * @author      :: won
+ * @module      Policy/isAdmin
+ * @description Policy to allow only an admin to create and destory items
+ * @author      won
  *
  */
 module.exports = function(req, res, next) {

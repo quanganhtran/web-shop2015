@@ -34,6 +34,16 @@ module.exports.policies = {
   * and its actions                                                          *
   *                                                                          *
   ***************************************************************************/
+  UserController: {
+    '*': true,
+    create: false,
+    getEditView: 'isLoggedIn',
+    edit: 'isLoggedIn',
+    showUsers: 'isAdmin',
+    setMerchant: 'isAdmin',
+    suspend: 'isAdmin'
+  },
+
   ItemController: {
     '*': true,
     create: false,
@@ -51,7 +61,9 @@ module.exports.policies = {
   OrderController: {
     '*': 'isLoggedIn',
     create: false,
-    read: 'isOwner',
+    read: ['orIsOwner', 'orIsAdmin', 'orPolicy'],
+    update: false,
+    destroy: false,
     prepare: 'isLoggedIn'
   }
 

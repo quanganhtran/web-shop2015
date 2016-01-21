@@ -19,7 +19,7 @@
         <form id="add-form" class="add-edit" name="addCart">
           <div class="simpleCart_shelfItem">
             <tr data-id="<%= item.id %>" data-model="item">
-              <td><p class="item_name"><%= item.name %></p></td>
+              <td><p class="item_name"><a href="/item/<%= item.id %>"><%= item.name %></a></p></td>
               <td><span class="item_price"><%= item.price %></span></td>
               <td><%= item.createdBy.username %></td>
               <td><%= item.description %></td>

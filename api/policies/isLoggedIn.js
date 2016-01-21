@@ -1,9 +1,8 @@
 /**
  * isLoggedIn
  *
- * @module      Policy
- * @description :: check if the user is logged in
- * @help        :: http://sailsjs.org/#!/documentation/concepts/Policies
+ * @module      Policy/isLoggedIn
+ * @description Check if the user is logged in
  */
 module.exports = function(req, res, next) {
 
