@@ -10,22 +10,21 @@
           <th>Created By</th>
           <th>description</th>
           <th>image</th>
-          <th>quantity</th>
+          <th style="width:15%;">quantity</th>
           <th></th>
           <th></th>
         </tr>
-
         <% _.each(items, function(item) { %>
         <form id="add-form" class="add-edit" name="addCart">
           <div class="simpleCart_shelfItem">
             <tr data-id="<%= item.id %>" data-model="item">
-              <td><p class="item_name"><a href="/item/<%= item.id %>"><%= item.name %></a></p></td>
+              <td><p><a class="item_name" href="/item/<%= item.id %>"><%= item.name %></a></p></td>
               <td><span class="item_price"><%= item.price %></span></td>
               <td><%= item.createdBy.username %></td>
               <td><%= item.description %></td>
               <td><a href="/item/<%= item.id %>"><img src="<%= item.imagePath%>" /></a></td>
               <td>
-                <input type="number" min="1" class="item_Quantity" value="1">
+                <input style="width:35%;" type="number" min="1" class="item_Quantity" value="1">
               </td>
               <td>
                 <% if (item.isAvailable) { %>

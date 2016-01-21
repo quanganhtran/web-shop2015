@@ -1,7 +1,7 @@
 /**
  * Order.js
  *
- * @description :: Contains references to user and separate order lines (details)
+ * @description :: Contains references to user and separate order lines (order details)
  * @docs        :: http://sailsjs.org/#!documentation/models
  */
 

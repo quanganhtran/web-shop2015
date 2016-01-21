@@ -1,7 +1,7 @@
 /**
 * Role.js
 *
-* @description :: Roles on the web store: admins, users, etc.
+* @description :: Roles on the web store: admins, users, merchant
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
 
