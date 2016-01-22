@@ -16,7 +16,7 @@
           <th></th>
           <th>Accept</th>
         </tr>
-        <tr ng-repeat="u in users">
+        <tr ng-repeat="u in users" class="users">
           <td>{{ u.username }}</td>
           <th><img src="{{ u.gravatarUrl }}" style="width:40px;"/></th>
           <td>{{ u.email }}</td>
@@ -44,10 +44,11 @@
 <script src="js/pages/userList.js"></script>
 <script>
   $(document).ready(function(){
-    $('.setMerchant').click(function () {
+    $('.table').on('click', '.setMerchant', function () {
       var id = $(this).data("id");
       console.log(id);
       $.get('/user/setMerchant/' + id, function (data, status) {
+        console.log(data);
         console.log(status);
         window.location = '/showUsers';
       });
